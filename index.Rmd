@@ -1,0 +1,165 @@
+---
+author: "David Swinkels"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  knitrBootstrap::bootstrap_document:
+    title: "Lesson 13: Google Earth Engine"
+    theme: "simplex"
+    highlight: Tomorrow Night Bright
+    menu: FALSE
+    theme.chooser: TRUE
+    highlight.chooser: TRUE
+---
+
+# [WUR Geoscripting](https://geoscripting-wur.github.io/) <img src="http://www.wur.nl/upload/b43b7095-e452-482a-8969-fed9a50393a8_WUR_RGB_standard.png" alt="WUR logo" style="height: 35px;"/>
+
+# "Lesson 13: Google Earth Engine"
+
+Good morning! Today we will start working with Google Earth Engine. 
+
+If you do not have an activated account yet, [register an account](https://signup.earthengine.google.com/#!/) now and hopefully your account will be activated soon. Otherwise try to work together with someone who has a registered account.
+
+### Today's schedule
+
+We will have a look at the purpose of Earth Engine, what Earth Engine can do for you and how to use Google Earth Engine with JavaScript and Python.
+
+## Purpose Earth Engine
+The purpose of Earth Engine is:
+
+- Perform highly-interactive algorithm development at global scale
+- Push the edge of the envelope for big data in remote sensing
+- Enable high-impact, data-driven science
+- Make substantive progress on global challenges that involve large geospatial datasets
+
+The platform for global analysis is there, but it needs specialists, students and researchers like you, to use the Earth Engine platform to do high-impact data-driven science.
+
+## What does Google Earth Engine do?
+
+Google Earth Engine is a cloud-based platform for planetary-scale environmental data analysis. 
+The main components of Earth Engine are:
+
+- Datasets: A petabyte-scale archive of publicly available remotely sensed imagery (such as Landsat, Sentinel and Modis) and other data (e.g. elevation data). [Explore categories of data in the archive or browse and search datasets](https://earthengine.google.com/datasets/). 
+- Compute power: Google’s computational infrastructure optimized for parallel processing of geospatial data. Learn more from [Gorelick et al. (2017)](http://www.sciencedirect.com/science/article/pii/S0034425717302900).
+- APIs: APIs for JavaScript and Python ([see GitHub](https://github.com/google/earthengine-api)) for making requests to the Earth Engine servers. These docs focus on JavaScript; ([Guide for Javascript API](https://developers.google.com/earth-engine/getstarted)). For Python, see the [Python install guide](https://developers.google.com/earth-engine/python_install.html) and the Python examples in the Earth Engine GitHub repository.
+- Code Editor: An online Integrated Development Environment (IDE) for rapid prototyping and visualization of complex spatial analyses using the Javascript API [Code Editor docs](https://developers.google.com/earth-engine/playground.html).
+
+## Google Earth Engine: Code Editor in JavaScript
+Today you will learn about Google Earth Engine by going through 9 tutorials made by Google. In the morning you will work on these tutorials. Have fun working in the cloud!
+
+1. [Get familiar with basic JavaScript syntax](https://developers.google.com/earth-engine/tutorial_js_01)
+2. [Get familiar with advanced JavaScript syntax](https://developers.google.com/earth-engine/tutorial_js_02)
+3. [Get familiar with the Code Editor](https://developers.google.com/earth-engine/playground)
+4. [Visualizing Images and Image Bands](https://developers.google.com/earth-engine/tutorial_api_02)
+5. [Computations using Images](https://developers.google.com/earth-engine/tutorial_api_03)
+6. [Image Collections](https://developers.google.com/earth-engine/tutorial_api_04)
+7. [Compositing, Masking, and Mosaicking](https://developers.google.com/earth-engine/tutorial_api_05)
+8. [NDVI, Mapping a Function over a Collection, Quality Mosaicking](https://developers.google.com/earth-engine/tutorial_api_06)
+9. [Exporting Charts and Images](https://developers.google.com/earth-engine/tutorial_api_07)
+
+Google Earth Engine is a nice platform to do downloadding, processing and visualizing. The nicest thing is that none of the data is processed on your computer
+
+> **Question 1**: Is the code on the online editor reproducible for other users?
+
+If you finished these tutorials and want to do more advanced stuff with the Code Editor you can have a look at [other tutorials made by universities](https://developers.google.com/earth-engine/edu) or at more [advanced guides of Earth Engine](https://developers.google.com/earth-engine/) (you can find the guides in the left pane) about the Image (e.g. [gradients](https://developers.google.com/earth-engine/image_gradients), [edge detection](https://developers.google.com/earth-engine/image_edges), [object detection](https://developers.google.com/earth-engine/image_objects)), ImageCollection, Geometry & Features, Reducer, Join, Chart ([e.g. time series analysis](https://developers.google.com/earth-engine/charts_image_series_by_region)), Array, User Interfaces, Specialized Algorithms, Asset Management, Custom Applications and Earth Engine setup.
+
+## Google Earth Engine: Python API
+JavaScript is a scripting language mainly used for web development. In data science Python is more commonly used. Allthough Earth Engine focuses on using JavaScript in the online Earth Engine Code Editor, an Earth Engine Python module was developed. The module allows you to connect via an API to to the Earth Engine servers. 
+
+This [presentation](https://docs.google.com/presentation/d/1MVVeyCdm-FrMVRPop6wB3iyd85TAlwB-F9ygTQZ8S1w/pub?slide=id.g1e419debf0_1_205) on the Earth Engine user summit explains more about the Python API. 
+
+Earth Engine normally uses Python 2.7. However Earth Engine is trying to make code compatible for both Python 2 and Python 3. Since Python 3 is the future, we will use Python 3. Your Google account needs to be accepted to authenticate your local Earth Engine Python module. So we need to setup the Python environment and get authenticated:
+
+```{r, engine = 'bash', eval = FALSE}
+# Create Conda environment
+conda create -n ee_py3 -c conda-forge python=3 google-api-python-client pyCrypto spyder jupyter
+
+source activate ee_py3
+
+# Ensure that a crypto library is available
+python -c "from oauth2client import crypt"
+
+# Install earthengine-api
+pip install earthengine-api
+
+# Authenticate earth engine
+earthengine authenticate
+# Follow procedure to authenticate and paste the access token in your terminal
+
+# Check if earth engine has been installed
+python -c "import ee; ee.Initialize()"
+# If you don't get an error, you are good to go
+```
+
+After setting up the Python environment, you can start a jupyter notebook or spyder and run some Python code.
+
+```{r, engine = 'python', eval = FALSE}
+# Import the Earth Engine Python Package
+import ee
+
+# Initialize the Earth Engine object, using the authentication credentials.
+ee.Initialize()
+
+# Print the information for an image asset.
+image = ee.Image('srtm90_v4')
+print(image.getInfo())
+```
+
+Now we want a Python script that shows a time series of Landsat 8 imagery. 
+
+```{r, engine = 'python', eval = FALSE}
+import ee
+from ee import batch
+
+## Initialize connection to server
+ee.Initialize()
+
+## Define your image collection 
+collection = ee.ImageCollection('LANDSAT/LC8_L1T_TOA')
+
+## Define time range
+collection_time = collection.filterDate('2013-04-11', '2018-01-01') #YYYY-MM-DD
+
+## Select location based on location of tile
+path = collection_time.filter(ee.Filter.eq('WRS_PATH', 198))
+pathrow = path.filter(ee.Filter.eq('WRS_ROW', 24))
+# or via geographical location:
+#point_geom = ee.Geometry.Point(5, 52) #longitude, latitude
+#pathrow = collection_time.filterBounds(point_geom)
+
+## Select imagery with less then 5% of image covered by clouds
+clouds = pathrow.filter(ee.Filter.lt('CLOUD_COVER', 5))
+
+## Select bands
+bands = clouds.select(['B4', 'B3', 'B2'])
+
+## Make 8 bit data
+def convertBit(image):
+    return image.multiply(512).uint8()  
+
+## Convert bands to output video  
+outputVideo = bands.map(convertBit)
+
+print("Starting to create a video")
+
+## Export video to Google Drive
+out = batch.Export.video.toDrive(outputVideo, description='Netherlands_video_region_L8_time', dimensions = 720, framesPerSecond = 2, region=([5.588144,51.993435], [5.727906, 51.993435],[5.727906, 51.944356],[5.588144, 51.944356]), maxFrames=10000)
+
+## Process the image
+process = batch.Task.start(out)
+
+print("Process sent to cloud")
+```
+
+To explain what is going on in the script: an ImageCollection is created and queried by filtering on date, location, clouds, bands. The ImageCollection object holds the information of the query and is sent to the Google Earth Engine server. The Google Earth Engine server then performs the task of gathering the data, making the imagery into a video and then exporting it to your Google Drive.
+
+## Assignment
+There is no assignment today! So explore how you can use Google Earth Engine for your project or try to do some of the more [advanced guides](https://developers.google.com/earth-engine/)(scroll through the left pane).
+
+
+## Additional information can be found here:
+- [Earth Engine developers forum](https://groups.google.com/forum/#!forum/google-earth-engine-developers)
+- [Creating cloud free landsat tile](https://www.researchgate.net/publication/302589628_Generating_a_cloud-free_homogeneous_Landsat-8_mosaic_of_Switzerland_using_Google_Earth_Engine)
+- Discussing black box of cloud computation by Jordi Inglada ([blog1](https://jordiinglada.net/wp/2016/05/12/is-google-earth-engine-evil-2/))([blog2](https://jordiinglada.net/wp/2016/05/23/sympathy-for-the-evil-lets-help-improve-google-earth-engine-2/))
+
+## References
+Most of the information on Google Earth Engine in this tutorial comes directly from [Google](https://developers.google.com/earth-engine/) and from universities, whom developed [tutorials](https://developers.google.com/earth-engine/edu) for students to work with Google Earth Engine.
