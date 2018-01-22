@@ -986,6 +986,17 @@ process = batch.Task.start(out)
 print("Process sent to cloud")</code></pre>
 </div>
 <p>To explain what is going on in the script: an ImageCollection is created and queried by filtering on date, location, clouds, bands. The ImageCollection object holds the information of the query and is sent to the Google Earth Engine server. The Google Earth Engine server then performs the task of gathering the data, making the imagery into a video and then exporting it to your Google Drive.</p>
+<p>There are some more <a href="https://github.com/tylere/AGU2017/tree/master/notebooks">advanced Python scripts</a> made by the Google Earth Engine developers that work with <code>bqplot</code> and <code>ipyleaflet</code>. If you want you can have a look at those too.</p>
+<div class="row">
+<button class="source bash toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> bash source
+</button>
+<pre style=""><code class="source bash"># Install bqplot from conda-forge channel and ipyleaflet with pip
+source activate ee_py3
+conda install -c conda-forge bqplot
+pip install ipyleaflet
+jupyter nbextension enable --py --sys-prefix ipyleaflet</code></pre>
+</div>
 <h2 id="assignment">Assignment</h2>
 <p>There is no assignment today! So explore how you can use Google Earth Engine for your project or try to do some of the more <a href="https://developers.google.com/earth-engine/">advanced guides</a>(scroll through the left pane).</p>
 <h2 id="additional-information-can-be-found-here">Additional information can be found here:</h2>
