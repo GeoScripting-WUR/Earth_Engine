@@ -56,7 +56,7 @@ Today you will learn about Google Earth Engine by going through 9 tutorials made
 8. [NDVI, Mapping a Function over a Collection, Quality Mosaicking](https://developers.google.com/earth-engine/tutorial_api_06)
 9. [Exporting Charts and Images](https://developers.google.com/earth-engine/tutorial_api_07)
 
-Google Earth Engine is a nice platform to do downloadding, processing and visualizing. The nicest thing is that none of the data is processed on your computer
+Google Earth Engine is a nice platform to do downloadding, processing and visualization.
 
 > **Question 1**: Is the code on the online editor reproducible for other users?
 
