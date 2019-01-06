@@ -40,8 +40,8 @@ The main components of Earth Engine are:
 
 - Datasets: A petabyte-scale archive of publicly available remotely sensed imagery (such as Landsat, Sentinel and Modis) and other data (e.g. elevation data). [Explore categories of data in the archive or browse and search datasets](https://earthengine.google.com/datasets/). 
 - Compute power: Google’s computational infrastructure optimized for parallel processing of geospatial data. Learn more from [Gorelick et al. (2017)](http://www.sciencedirect.com/science/article/pii/S0034425717302900).
-- APIs: APIs for JavaScript and Python ([see GitHub](https://github.com/google/earthengine-api)) for making requests to the Earth Engine servers. These docs focus on JavaScript; ([Guide for Javascript API](https://developers.google.com/earth-engine/getstarted)). For Python, see the [Python install guide](https://developers.google.com/earth-engine/python_install.html) and the Python examples in the Earth Engine GitHub repository.
-- Code Editor: An online Integrated Development Environment (IDE) for rapid prototyping and visualization of complex spatial analyses using the Javascript API [Code Editor docs](https://developers.google.com/earth-engine/playground.html).
+- APIs: APIs for JavaScript and Python ([see GitHub](https://github.com/google/earthengine-api)) for making requests to the Earth Engine servers. These docs focus on JavaScript; ([Guide for JavaScript API](https://developers.google.com/earth-engine/getstarted)). For Python, see the [Python install guide](https://developers.google.com/earth-engine/python_install.html) and the Python examples in the Earth Engine GitHub repository.
+- Code Editor: An online Integrated Development Environment (IDE) for rapid prototyping and visualization of complex spatial analyses using the JavaScript API [Code Editor docs](https://developers.google.com/earth-engine/playground.html).
 
 ## Google Earth Engine: Code Editor in JavaScript
 Today you will learn about Google Earth Engine by going through 9 tutorials made by Google. In the morning you will work on these tutorials. Have fun working in the cloud!
@@ -56,7 +56,7 @@ Today you will learn about Google Earth Engine by going through 9 tutorials made
 8. [NDVI, Mapping a Function over a Collection, Quality Mosaicking](https://developers.google.com/earth-engine/tutorial_api_06)
 9. [Exporting Charts and Images](https://developers.google.com/earth-engine/tutorial_api_07)
 
-Google Earth Engine is a nice platform to do downloadding, processing and visualization.
+Google Earth Engine is a nice platform to do downloading, processing and visualization.
 
 > **Question 1**: Is the code on the online editor reproducible for other users?
 
