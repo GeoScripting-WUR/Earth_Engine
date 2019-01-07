@@ -1,5 +1,6 @@
 ---
 author: "David Swinkels"
+contributors: "Andrei Mirt"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   knitrBootstrap::bootstrap_document:
@@ -56,14 +57,17 @@ Today you will learn about Google Earth Engine by going through 9 tutorials made
 8. [NDVI, Mapping a Function over a Collection, Quality Mosaicking](https://developers.google.com/earth-engine/tutorial_api_06)
 9. [Exporting Charts and Images](https://developers.google.com/earth-engine/tutorial_api_07)
 
-Google Earth Engine is a nice platform to do downloading, processing and visualization.
+```{block2, type="alert alert-info"}
+ProTip: at almost any point you can use ``.aside(print)`` for debugging purposes. Come back to this [Debugging guide](https://developers.google.com/earth-engine/debugging) when in need
+```
+Google Earth Engine is a nice platform for processing and visualization. Even though raw data can be downloaded, such an attempt would defeat its intended goal of uploading the code next to the data instead of downloading data next to the code.
 
 > **Question 1**: Is the code on the online editor reproducible for other users?
 
 If you finished these tutorials and want to do more advanced stuff with the Code Editor you can have a look at [other tutorials made by universities](https://developers.google.com/earth-engine/edu) or at more [advanced guides of Earth Engine](https://developers.google.com/earth-engine/) (you can find the guides in the left pane) about the Image (e.g. [gradients](https://developers.google.com/earth-engine/image_gradients), [edge detection](https://developers.google.com/earth-engine/image_edges), [object detection](https://developers.google.com/earth-engine/image_objects)), ImageCollection, Geometry & Features, Reducer, Join, Chart ([e.g. time series analysis](https://developers.google.com/earth-engine/charts_image_series_by_region)), Array, User Interfaces, Specialized Algorithms, Asset Management, Custom Applications and Earth Engine setup.
 
 ## Google Earth Engine: Python API
-JavaScript is a scripting language mainly used for web development. In data science Python is more commonly used. Allthough Earth Engine focuses on using JavaScript in the online Earth Engine Code Editor, an Earth Engine Python module was developed. The module allows you to connect via an API to to the Earth Engine servers. 
+Although Earth Engine focuses on using JavaScript in the online Earth Engine Code Editor, an Earth Engine Python module was developed. The module allows you to connect via an API to to the Earth Engine servers. 
 
 This [presentation](https://docs.google.com/presentation/d/1MVVeyCdm-FrMVRPop6wB3iyd85TAlwB-F9ygTQZ8S1w/pub?slide=id.g1e419debf0_1_205) on the Earth Engine user summit explains more about the Python API. 
 
@@ -163,8 +167,81 @@ jupyter nbextension enable --py --sys-prefix ipyleaflet
 ```
 
 ## Assignment
-There is no assignment today! So explore how you can use Google Earth Engine for your project or try to do some of the more [advanced guides](https://developers.google.com/earth-engine/)(scroll through the left pane).
 
+In remote sensing clouds are our arch enemies. You probably heard this a lot, and you'll hear it again from everyone working with satellite imagery.
+
+But how big of a problem are clouds, cloud shadows, or other obstructions? Are they as bad as people say?
+
+Have fun figuring it out using the [online code editor of Google Earth Engine](https://code.earthengine.google.com/).
+
+### A bit of organization first
+
+1. Create a new repository, named like your team, using the red new button on your left in the [GEE code editor](https://code.earthengine.google.com/)
+
+2. Create a new file in that repository and name it *Assignment13*. At the beginning of this file write your names as comments.
+
+3. Either now, or after you're done with your assignment, share your newly created repository with andrei.mirt@gmail.com
+
+### Requirements
+
+Display a map for an area of your choice in which each pixel represents the number of clear Landsat 8 (not clouded) observations at that location for the year 2018.
+
+```{block2, type="btn btn-info"}
+Hint1
+```
+```{block2, type="alert alert-info"}
+It is really important to [Get familiar with the Geometry tools of the Code Editor](https://developers.google.com/earth-engine/playground), in order to be able to choose a geometry of interest.
+```
+
+
+```{block2, type="btn btn-info"}
+Hint2
+```
+```{block2, type="alert alert-info"}
+The code editor is powerful because you can [visualize images](https://developers.google.com/earth-engine/tutorial_api_02) immediately on the Map section.
+```
+
+
+```{block2, type="btn btn-info"}
+Hint3
+```
+
+```{block2, type="alert alert-info"}
+It is important to think what [Image Collections and bands](https://developers.google.com/earth-engine/tutorial_api_04) you need to filter on your dates.
+
+The quality mask is stored in the pixel_qa band as a bitmask. You can use the [Landsat 8 Surface Reflectance Code Product Guide](https://landsat.usgs.gov/sites/default/files/documents/lasrc_product_guide.pdf) to remap the clear pixel_qa values to 1. 386 is a good value for clear observations.
+```
+
+> **Question 2**:  Can you find a better value for clear observations than 386, could you use these together?
+
+```{block2, type="btn btn-info"}
+Hint4
+```
+```{block, type="alert alert-info"}
+ Are there any interesting patterns on the total number of observations? Can you explain all these patterns? The answer to this question on [StackExchange](https://gis.stackexchange.com/questions/280156/mosaicking-a-image-collection-by-date-day-in-google-earth-engine) might come in handy.
+```
+
+```{block2, type="btn btn-success"}
+SuperHint
+```
+```{block2, type="alert alert-success"}
+You should probably first **count** all valid observations and then **mask** your way through **each** band towards the **total** number of clear observations.
+```
+
+```{block, type="btn btn-warning"}
+BonusTask
+```
+```{block, type="alert alert-warning"}
+Do the same for sentinel 2. Plot the map in parallel linked panels.
+```
+
+Still have some time left? Work on the visualization parameters.
+
+```{block, type="alert alert-danger"}
+Ask the team checking your script for their Google Earth Engine account (gmail address), and don't forget to share your repository with them and with andrei.mirt@gmail.com
+```
+
+Further you can explore how you can use Google Earth Engine for your project or try to do some of the more [advanced guides](https://developers.google.com/earth-engine/)(scroll through the left pane).
 
 ## Additional information can be found here:
 - [Earth Engine developers forum](https://groups.google.com/forum/#!forum/google-earth-engine-developers)
