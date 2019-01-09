@@ -870,9 +870,31 @@ Lesson 13: Google Earth Engine
 <div class="row row-offcanvas row-offcanvas-right">
 <div class="contents col-xs-12 col-md-10">
 <h1 id="wur-geoscripting"><a href="https://geoscripting-wur.github.io/">WUR Geoscripting</a> <img src="http://www.wur.nl/upload/b43b7095-e452-482a-8969-fed9a50393a8_WUR_RGB_standard.png" alt="WUR logo" style="height: 35px;"/></h1>
-<h1 id="lesson-13-google-earth-engine">&quot;Lesson 13: Google Earth Engine&quot;</h1>
+<h1 id="week-3-lesson-13-google-earth-engine">Week 3, Lesson 13: Google Earth Engine</h1>
 <p>Good morning! Today we will start working with Google Earth Engine.</p>
-<p>If you do not have an activated account yet, <a href="https://signup.earthengine.google.com/#!/">register an account</a> now and hopefully your account will be activated soon. Otherwise try to work together with someone who has a registered account.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Morning</td>
+<td>Self-study: go through the following tutorial</td>
+</tr>
+<tr class="even">
+<td>14:00 to 14:40</td>
+<td>Presentation and discussion</td>
+</tr>
+<tr class="odd">
+<td>Rest of the afternoon</td>
+<td>Do/finalise the exercise.</td>
+</tr>
+</tbody>
+</table>
+<p>If you do not have an activated account yet, <a href="https://signup.earthengine.google.com/#!/">register an account</a> now and hopefully your account will be activated soon. If it doesn't work out, ask someone to share a repository with you, that should grant you an account.</p>
 <h3 id="todays-schedule">Today's schedule</h3>
 <p>We will have a look at the purpose of Earth Engine, what Earth Engine can do for you and how to use Google Earth Engine with JavaScript and Python.</p>
 <h2 id="purpose-earth-engine">Purpose Earth Engine</h2>
@@ -913,9 +935,15 @@ ProTip: at almost any point you can use <code>.aside(print)</code> for debugging
 
 </div>
 <p>Google Earth Engine is a nice platform for processing and visualization. Even though raw data can be downloaded, such an attempt would defeat its intended goal of uploading the code next to the data instead of downloading data next to the code.</p>
+<div class="row">
+<div class="alert alert-success">
 <blockquote>
-<p><strong>Question 1</strong>: Is the code on the online editor reproducible for other users?</p>
+<p>
+<strong>Question 1</strong>: Is the code on the online editor reproducible for other users?
+</p>
 </blockquote>
+</div>
+</div>
 <p>If you finished these tutorials and want to do more advanced stuff with the Code Editor you can have a look at <a href="https://developers.google.com/earth-engine/edu">other tutorials made by universities</a> or at more <a href="https://developers.google.com/earth-engine/">advanced guides of Earth Engine</a> (you can find the guides in the left pane) about the Image (e.g. <a href="https://developers.google.com/earth-engine/image_gradients">gradients</a>, <a href="https://developers.google.com/earth-engine/image_edges">edge detection</a>, <a href="https://developers.google.com/earth-engine/image_objects">object detection</a>), ImageCollection, Geometry &amp; Features, Reducer, Join, Chart (<a href="https://developers.google.com/earth-engine/charts_image_series_by_region">e.g. time series analysis</a>), Array, User Interfaces, Specialized Algorithms, Asset Management, Custom Applications and Earth Engine setup.</p>
 <h2 id="google-earth-engine-python-api">Google Earth Engine: Python API</h2>
 <p>Although Earth Engine focuses on using JavaScript in the online Earth Engine Code Editor, an Earth Engine Python module was developed. The module allows you to connect via an API to to the Earth Engine servers.</p>
@@ -1004,78 +1032,37 @@ conda install -c conda-forge bqplot
 pip install ipyleaflet
 jupyter nbextension enable --py --sys-prefix ipyleaflet</code></pre>
 </div>
-<h2 id="assignment">Assignment</h2>
+<h1 id="exercise-13-blue-skies">Exercise 13 : Blue skies</h1>
 <p>In remote sensing clouds are our arch enemies. You probably heard this a lot, and you'll hear it again from everyone working with satellite imagery.</p>
 <p>But how big of a problem are clouds, cloud shadows, or other obstructions? Are they as bad as people say?</p>
 <p>Have fun figuring it out using the <a href="https://code.earthengine.google.com/">online code editor of Google Earth Engine</a>.</p>
-<h3 id="a-bit-of-organization-first">A bit of organization first</h3>
+<h2 id="a-bit-of-organization-first">A bit of organization first</h2>
 <ol style="list-style-type: decimal">
 <li><p>Create a new repository, named like your team, using the red new button on your left in the <a href="https://code.earthengine.google.com/">GEE code editor</a></p></li>
 <li><p>Create a new file in that repository and name it <em>Assignment13</em>. At the beginning of this file write your names as comments.</p></li>
 <li><p>Either now, or after you're done with your assignment, share your newly created repository with andrei.mirt@gmail.com</p></li>
 </ol>
-<h3 id="requirements">Requirements</h3>
-<p>Display a map for an area of your choice in which each pixel represents the number of clear Landsat 8 (not clouded) observations at that location for the year 2018.</p>
+<h2 id="requirements">Requirements</h2>
+<p>Display a map for an area of your choice in which each pixel represents the number of clear Landsat 8 (not clouded) observations at that location for the year 2018. The final map should look somewhat similar to the picture below:</p>
+<p><img src="exercise_expected_output.png" alt="white for clear skyes and black for cloudy" /></p>
+<h2 id="hints">Hints</h2>
+<ul>
+<li>It is really important to <a href="https://developers.google.com/earth-engine/playground">Get familiar with the Geometry tools of the Code Editor</a>, in order to be able to choose a geometry of interest.</li>
+<li>The code editor is powerful because you can <a href="https://developers.google.com/earth-engine/tutorial_api_02">visualize images</a> immediately on the Map section.</li>
+<li>It is important to think what <a href="https://developers.google.com/earth-engine/tutorial_api_04">Image Collections and bands</a> you need to filter on your dates.</li>
+</ul>
+<p>The quality mask is stored in the pixel_qa band as a bitmask. You can use the <a href="https://landsat.usgs.gov/sites/default/files/documents/lasrc_product_guide.pdf">Landsat 8 Surface Reflectance Code Product Guide</a> to remap the clear pixel_qa values to 1. 386 is a good value for clear observations.</p>
 <div class="row">
-
-<div class="btn btn-info">
-Hint1
-</div>
-
-</div>
-<div class="row">
-
-<div class="alert alert-info">
-It is really important to <a href="https://developers.google.com/earth-engine/playground">Get familiar with the Geometry tools of the Code Editor</a>, in order to be able to choose a geometry of interest.
-</div>
-
-</div>
-<div class="row">
-
-<div class="btn btn-info">
-Hint2
-</div>
-
-</div>
-<div class="row">
-
-<div class="alert alert-info">
-The code editor is powerful because you can <a href="https://developers.google.com/earth-engine/tutorial_api_02">visualize images</a> immediately on the Map section.
-</div>
-
-</div>
-<div class="row">
-
-<div class="btn btn-info">
-Hint3
-</div>
-
-</div>
-<div class="row">
-
-<div class="alert alert-info">
-<p>It is important to think what <a href="https://developers.google.com/earth-engine/tutorial_api_04">Image Collections and bands</a> you need to filter on your dates.</p>
-The quality mask is stored in the pixel_qa band as a bitmask. You can use the <a href="https://landsat.usgs.gov/sites/default/files/documents/lasrc_product_guide.pdf">Landsat 8 Surface Reflectance Code Product Guide</a> to remap the clear pixel_qa values to 1. 386 is a good value for clear observations.
-</div>
-
-</div>
+<div class="alert alert-success">
 <blockquote>
-<p><strong>Question 2</strong>: Can you find a better value for clear observations than 386, could you use these together?</p>
-</blockquote>
-<div class="row">
-
-<div class="btn btn-info">
-Hint4
-</div>
-
-</div>
-<div class="row">
-<div class="alert alert-info">
 <p>
-Are there any interesting patterns on the total number of observations? Can you explain all these patterns? The answer to this question on <a href="https://gis.stackexchange.com/questions/280156/mosaicking-a-image-collection-by-date-day-in-google-earth-engine">StackExchange</a> might come in handy.
+<strong>Question 2</strong>: Can you find a better value for clear observations than 386, could you use these together?
 </p>
+</blockquote>
 </div>
 </div>
+<h2 id="more-hints">More hints</h2>
+<p>-Are there any interesting patterns on the total number of observations? Can you explain all these patterns? The answer to this question on <a href="https://gis.stackexchange.com/questions/280156/mosaicking-a-image-collection-by-date-day-in-google-earth-engine">StackExchange</a> might come in handy.</p>
 <div class="row">
 
 <div class="btn btn-success">
@@ -1090,37 +1077,27 @@ You should probably first <strong>count</strong> all valid observations and then
 </div>
 
 </div>
-<div class="row">
-<div class="btn btn-warning">
-<p>
-BonusTask
-</p>
-</div>
-</div>
-<div class="row">
-<div class="alert alert-warning">
-<p>
-Do the same for sentinel 2. Plot the map in parallel linked panels.
-</p>
-</div>
-</div>
+<h1 id="bonus">Bonus</h1>
+<ul>
+<li>Do the same for sentinel 2. Plot the map in parallel linked panels.</li>
+</ul>
 <p>Still have some time left? Work on the visualization parameters.</p>
-<div class="row">
-<div class="alert alert-danger">
-<p>
-Ask the team checking your script for their Google Earth Engine account (gmail address), and don't forget to share your repository with them and with andrei.mirt@gmail.com
-</p>
-</div>
-</div>
+<h1 id="submission">Submission</h1>
+<p>Ask the team checking your script for their Google Earth Engine account (gmail address), and don't forget to share your repository with them and with andrei.mirt@gmail.com</p>
+<p>In order to assess the exercise, consider the following tasks:</p>
+<ul>
+<li>Task 1: The script displays a map somehow related to the input data</li>
+<li>Task 2: The script displays the map that shows the number of clear observations, but some values are unnecessarily repeated</li>
+<li>Task 3: The script displays the correct map that shows the number of clear observations, without repeating unnecessary values</li>
+</ul>
 <p>Further you can explore how you can use Google Earth Engine for your project or try to do some of the more <a href="https://developers.google.com/earth-engine/">advanced guides</a>(scroll through the left pane).</p>
-<h2 id="additional-information-can-be-found-here">Additional information can be found here:</h2>
+<p>Sunny places make good holidays. After all this work, you can use the map you just created to search for your next holiday destination, while listening to an <a href="https://www.youtube.com/watch?v=64rulm3CFhg">Irving Berlin classic</a>.</p>
+<h1 id="references-and-more-info">References and more info</h1>
+<p>Most of the information on Google Earth Engine in this tutorial comes directly from <a href="https://developers.google.com/earth-engine/">Google</a> and from universities, whom developed <a href="https://developers.google.com/earth-engine/edu">tutorials</a> for students to work with Google Earth Engine.</p>
 <ul>
 <li><a href="https://groups.google.com/forum/#!forum/google-earth-engine-developers">Earth Engine developers forum</a></li>
 <li><a href="https://www.researchgate.net/publication/302589628_Generating_a_cloud-free_homogeneous_Landsat-8_mosaic_of_Switzerland_using_Google_Earth_Engine">Creating cloud free landsat tile</a></li>
-<li>Discussing black box of cloud computation by Jordi Inglada (<a href="https://jordiinglada.net/wp/2016/05/12/is-google-earth-engine-evil-2/">blog1</a>)(<a href="https://jordiinglada.net/wp/2016/05/23/sympathy-for-the-evil-lets-help-improve-google-earth-engine-2/">blog2</a>)</li>
-</ul>
-<h2 id="references">References</h2>
-Most of the information on Google Earth Engine in this tutorial comes directly from <a href="https://developers.google.com/earth-engine/">Google</a> and from universities, whom developed <a href="https://developers.google.com/earth-engine/edu">tutorials</a> for students to work with Google Earth Engine.
+<li>Discussing black box of cloud computation by Jordi Inglada (<a href="https://jordiinglada.net/wp/2016/05/12/is-google-earth-engine-evil-2/">blog1</a>)(<a href="https://jordiinglada.net/wp/2016/05/23/sympathy-for-the-evil-lets-help-improve-google-earth-engine-2/">blog2</a>)
 </div>
 </div>
 </div>
@@ -1135,6 +1112,7 @@ Styled with <a href="https://github.com/jimhester/knitrBootstrap">knitrBootstrap
 </div>
 </div>
 <link rel="stylesheet" id="theme" href="https://netdna.bootstrapcdn.com/bootswatch/3.0.0/simplex/bootstrap.min.css" media="screen"></link><link rel="stylesheet" id="highlight" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/tomorrow-night-bright.min.css" media="screen"></link>
-</div>
+</div></li>
+</ul>
 </body>
 </html>

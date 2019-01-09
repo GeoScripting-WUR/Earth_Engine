@@ -14,11 +14,17 @@ output:
 
 # [WUR Geoscripting](https://geoscripting-wur.github.io/) <img src="http://www.wur.nl/upload/b43b7095-e452-482a-8969-fed9a50393a8_WUR_RGB_standard.png" alt="WUR logo" style="height: 35px;"/>
 
-# "Lesson 13: Google Earth Engine"
+# Week 3, Lesson 13: Google Earth Engine
 
-Good morning! Today we will start working with Google Earth Engine. 
+Good morning! Today we will start working with Google Earth Engine.
 
-If you do not have an activated account yet, [register an account](https://signup.earthengine.google.com/#!/) now and hopefully your account will be activated soon. Otherwise try to work together with someone who has a registered account.
+Time  | Activity
+------------- | -------------
+Morning  |  Self-study: go through the following tutorial
+14:00 to 14:40  | Presentation and discussion
+Rest of the afternoon | Do/finalise the exercise.
+
+If you do not have an activated account yet, [register an account](https://signup.earthengine.google.com/#!/) now and hopefully your account will be activated soon. If it doesn't work out, ask someone to share a repository with you, that should grant you an account.
 
 ### Today's schedule
 
@@ -62,7 +68,9 @@ ProTip: at almost any point you can use ``.aside(print)`` for debugging purposes
 ```
 Google Earth Engine is a nice platform for processing and visualization. Even though raw data can be downloaded, such an attempt would defeat its intended goal of uploading the code next to the data instead of downloading data next to the code.
 
+```{block, type="alert alert-success"}
 > **Question 1**: Is the code on the online editor reproducible for other users?
+```
 
 If you finished these tutorials and want to do more advanced stuff with the Code Editor you can have a look at [other tutorials made by universities](https://developers.google.com/earth-engine/edu) or at more [advanced guides of Earth Engine](https://developers.google.com/earth-engine/) (you can find the guides in the left pane) about the Image (e.g. [gradients](https://developers.google.com/earth-engine/image_gradients), [edge detection](https://developers.google.com/earth-engine/image_edges), [object detection](https://developers.google.com/earth-engine/image_objects)), ImageCollection, Geometry & Features, Reducer, Join, Chart ([e.g. time series analysis](https://developers.google.com/earth-engine/charts_image_series_by_region)), Array, User Interfaces, Specialized Algorithms, Asset Management, Custom Applications and Earth Engine setup.
 
@@ -166,7 +174,7 @@ pip install ipyleaflet
 jupyter nbextension enable --py --sys-prefix ipyleaflet
 ```
 
-## Assignment
+# Exercise 13 : Blue skies
 
 In remote sensing clouds are our arch enemies. You probably heard this a lot, and you'll hear it again from everyone working with satellite imagery.
 
@@ -174,7 +182,7 @@ But how big of a problem are clouds, cloud shadows, or other obstructions? Are t
 
 Have fun figuring it out using the [online code editor of Google Earth Engine](https://code.earthengine.google.com/).
 
-### A bit of organization first
+## A bit of organization first
 
 1. Create a new repository, named like your team, using the red new button on your left in the [GEE code editor](https://code.earthengine.google.com/)
 
@@ -182,44 +190,29 @@ Have fun figuring it out using the [online code editor of Google Earth Engine](h
 
 3. Either now, or after you're done with your assignment, share your newly created repository with andrei.mirt@gmail.com
 
-### Requirements
+## Requirements
 
-Display a map for an area of your choice in which each pixel represents the number of clear Landsat 8 (not clouded) observations at that location for the year 2018.
+Display a map for an area of your choice in which each pixel represents the number of clear Landsat 8 (not clouded) observations at that location for the year 2018. The final map should look somewhat similar to the picture below:
 
-```{block2, type="btn btn-info"}
-Hint1
-```
-```{block2, type="alert alert-info"}
-It is really important to [Get familiar with the Geometry tools of the Code Editor](https://developers.google.com/earth-engine/playground), in order to be able to choose a geometry of interest.
-```
+![white for clear skyes and black for cloudy](exercise_expected_output.png)
 
+## Hints
 
-```{block2, type="btn btn-info"}
-Hint2
-```
-```{block2, type="alert alert-info"}
-The code editor is powerful because you can [visualize images](https://developers.google.com/earth-engine/tutorial_api_02) immediately on the Map section.
-```
-
-
-```{block2, type="btn btn-info"}
-Hint3
-```
-
-```{block2, type="alert alert-info"}
-It is important to think what [Image Collections and bands](https://developers.google.com/earth-engine/tutorial_api_04) you need to filter on your dates.
+- It is really important to [Get familiar with the Geometry tools of the Code Editor](https://developers.google.com/earth-engine/playground), in order to be able to choose a geometry of interest.
+- The code editor is powerful because you can [visualize images](https://developers.google.com/earth-engine/tutorial_api_02) immediately on the Map section.
+- It is important to think what [Image Collections and bands](https://developers.google.com/earth-engine/tutorial_api_04) you need to filter on your dates.
 
 The quality mask is stored in the pixel_qa band as a bitmask. You can use the [Landsat 8 Surface Reflectance Code Product Guide](https://landsat.usgs.gov/sites/default/files/documents/lasrc_product_guide.pdf) to remap the clear pixel_qa values to 1. 386 is a good value for clear observations.
-```
 
+
+```{block, type="alert alert-success"}
 > **Question 2**:  Can you find a better value for clear observations than 386, could you use these together?
+```
 
-```{block2, type="btn btn-info"}
-Hint4
-```
-```{block, type="alert alert-info"}
- Are there any interesting patterns on the total number of observations? Can you explain all these patterns? The answer to this question on [StackExchange](https://gis.stackexchange.com/questions/280156/mosaicking-a-image-collection-by-date-day-in-google-earth-engine) might come in handy.
-```
+## More hints
+
+-Are there any interesting patterns on the total number of observations? Can you explain all these patterns? The answer to this question on [StackExchange](https://gis.stackexchange.com/questions/280156/mosaicking-a-image-collection-by-date-day-in-google-earth-engine) might come in handy.
+
 
 ```{block2, type="btn btn-success"}
 SuperHint
@@ -228,25 +221,30 @@ SuperHint
 You should probably first **count** all valid observations and then **mask** your way through **each** band towards the **total** number of clear observations.
 ```
 
-```{block, type="btn btn-warning"}
-BonusTask
-```
-```{block, type="alert alert-warning"}
-Do the same for sentinel 2. Plot the map in parallel linked panels.
-```
+# Bonus
+
+- Do the same for sentinel 2. Plot the map in parallel linked panels.
 
 Still have some time left? Work on the visualization parameters.
 
-```{block, type="alert alert-danger"}
+# Submission
+
 Ask the team checking your script for their Google Earth Engine account (gmail address), and don't forget to share your repository with them and with andrei.mirt@gmail.com
-```
+
+In order to assess the exercise, consider the following tasks:
+
+- Task 1: The script displays a map somehow related to the input data
+- Task 2: The script displays the map that shows the number of clear observations, but some values are unnecessarily repeated
+- Task 3: The script displays the correct map that shows the number of clear observations, without repeating unnecessary values
 
 Further you can explore how you can use Google Earth Engine for your project or try to do some of the more [advanced guides](https://developers.google.com/earth-engine/)(scroll through the left pane).
 
-## Additional information can be found here:
+Sunny places make good holidays. After all this work, you can use the map you just created to search for your next holiday destination, while listening to an [Irving Berlin classic](https://www.youtube.com/watch?v=64rulm3CFhg).
+
+# References and more info
+
+Most of the information on Google Earth Engine in this tutorial comes directly from [Google](https://developers.google.com/earth-engine/) and from universities, whom developed [tutorials](https://developers.google.com/earth-engine/edu) for students to work with Google Earth Engine.
+
 - [Earth Engine developers forum](https://groups.google.com/forum/#!forum/google-earth-engine-developers)
 - [Creating cloud free landsat tile](https://www.researchgate.net/publication/302589628_Generating_a_cloud-free_homogeneous_Landsat-8_mosaic_of_Switzerland_using_Google_Earth_Engine)
 - Discussing black box of cloud computation by Jordi Inglada ([blog1](https://jordiinglada.net/wp/2016/05/12/is-google-earth-engine-evil-2/))([blog2](https://jordiinglada.net/wp/2016/05/23/sympathy-for-the-evil-lets-help-improve-google-earth-engine-2/))
-
-## References
-Most of the information on Google Earth Engine in this tutorial comes directly from [Google](https://developers.google.com/earth-engine/) and from universities, whom developed [tutorials](https://developers.google.com/earth-engine/edu) for students to work with Google Earth Engine.
