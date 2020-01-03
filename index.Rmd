@@ -2,9 +2,9 @@
 author: "David Swinkels"
 contributors: "Andrei Mirt"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
+pagetitle: "Lesson 12: Google Earth Engine"
 output:
   knitrBootstrap::bootstrap_document:
-    title: "Lesson 13: Google Earth Engine"
     theme: "simplex"
     highlight: Tomorrow Night Bright
     menu: FALSE
@@ -12,17 +12,21 @@ output:
     highlight.chooser: TRUE
 ---
 
-# [WUR Geoscripting](https://geoscripting-wur.github.io/) <img src="http://www.wur.nl/upload/b43b7095-e452-482a-8969-fed9a50393a8_WUR_RGB_standard.png" alt="WUR logo" style="height: 35px;"/>
+# [WUR Geoscripting](https://geoscripting-wur.github.io/) <img src="https://www.wur.nl/upload/5e55a1d9-47c3-4149-9384-26d5147ee2d7_WUR_RGB_standard.png" alt="WUR logo" style="height: 35px;"/>
 
-# Week 3, Lesson 13: Google Earth Engine
+# Week 3, Lesson 12: Google Earth Engine
 
 Good morning! Today we will start working with Google Earth Engine.
+
+<!--
 
 Time  | Activity
 ------------- | -------------
 Morning  |  Self-study: go through the following tutorial
 14:00 to 14:40  | Presentation and discussion
 Rest of the afternoon | Do/finalise the exercise.
+
+-->
 
 If you do not have an activated account yet, [register an account](https://signup.earthengine.google.com/#!/) now and hopefully your account will be activated soon. If it doesn't work out, ask someone to share a repository with you, that should grant you an account.
 
@@ -174,6 +178,8 @@ pip install ipyleaflet
 jupyter nbextension enable --py --sys-prefix ipyleaflet
 ```
 
+<!--
+
 # Exercise 13 : Blue skies
 
 In remote sensing clouds are our arch enemies. You probably heard this a lot, and you'll hear it again from everyone working with satellite imagery.
@@ -240,6 +246,8 @@ In order to assess the exercise, consider the following tasks:
 Further you can explore how you can use Google Earth Engine for your project or try to do some of the more [advanced guides](https://developers.google.com/earth-engine/)(scroll through the left pane).
 
 Sunny places make good holidays. After all this work, you can use the map you just created to search for your next holiday destination, while listening to an [Irving Berlin classic](https://www.youtube.com/watch?v=64rulm3CFhg).
+
+-->
 
 # References and more info
 
