@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="David Swinkels" />
-  <title>Lesson 12: Google Earth Engine</title>
-  <style>
+  <title>Lesson 8: Google Earth Engine</title>
+  <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- jQuery -->
@@ -875,7 +872,7 @@
 <div class="row row-offcanvas row-offcanvas-right">
 <div class="contents col-xs-12 col-md-10">
 <h1 id="wur-geoscripting"><a href="https://geoscripting-wur.github.io/">WUR Geoscripting</a> <img src="https://www.wur.nl/upload/5e55a1d9-47c3-4149-9384-26d5147ee2d7_WUR_RGB_standard.png" alt="WUR logo" style="height: 35px;"/></h1>
-<h1 id="week-3-lesson-12-google-earth-engine">Week 3, Lesson 12: Google Earth Engine</h1>
+<h1 id="week-2-lesson-8-google-earth-engine">Week 2, Lesson 8: Google Earth Engine</h1>
 <p>Good morning! Today we will start working with Google Earth Engine.</p>
 <!--
 
@@ -908,7 +905,7 @@ Rest of the afternoon | Do/finalise the exercise.
 </ul>
 <h2 id="google-earth-engine-code-editor-in-javascript">Google Earth Engine: Code Editor in JavaScript</h2>
 <p>Today you will learn about Google Earth Engine by going through 9 tutorials made by Google. In the morning you will work on these tutorials. Have fun working in the cloud!</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li><a href="https://developers.google.com/earth-engine/tutorial_js_01">Get familiar with basic JavaScript syntax</a></li>
 <li><a href="https://developers.google.com/earth-engine/tutorial_js_02">Get familiar with advanced JavaScript syntax</a></li>
 <li><a href="https://developers.google.com/earth-engine/playground">Get familiar with the Code Editor</a></li>
@@ -942,6 +939,13 @@ ProTip: at almost any point you can use <code>.aside(print)</code> for debugging
 <p>This <a href="https://docs.google.com/presentation/d/1MVVeyCdm-FrMVRPop6wB3iyd85TAlwB-F9ygTQZ8S1w/pub?slide=id.g1e419debf0_1_205">presentation</a> on the Earth Engine user summit explains more about the Python API.</p>
 <p>Earth Engine normally uses Python 2.7. However Earth Engine is trying to make code compatible for both Python 2 and Python 3. Since Python 3 is the future, we will use Python 3. Your Google account needs to be accepted to authenticate your local Earth Engine Python module. So we need to setup the Python environment and get authenticated:</p>
 <div class="row">
+
+<div class="alert alert-warning">
+<strong>Warning:</strong> The code below will likely not work without running some scripts in your Linux VM. Please first go to <a href="https://geoscripting-wur.github.io/PythonRefresher/">the Python Refresher of next week</a> and follow the steps under ‘Conda installation’.
+</div>
+
+</div>
+<div class="row">
 <button class="source bash toggle btn btn-xs btn-primary">
 <span class="glyphicon glyphicon-chevron-down"></span> bash source
 </button>
@@ -965,6 +969,13 @@ python -c "import ee; ee.Initialize()"
 # If you don't get an error, you are good to go</code></pre>
 </div>
 <p>After setting up the Python environment, you can start a jupyter notebook or spyder and run some Python code.</p>
+<div class="row">
+
+<div class="alert alert-info">
+ProTip: Don’t know how to start Spyder or a Jupyter Notebook? Take a look at <a href="https://geoscripting-wur.github.io/PythonRefresher/">the Python Refresher of next week</a>.
+</div>
+
+</div>
 <div class="row">
 <button class="source python toggle btn btn-xs btn-primary">
 <span class="glyphicon glyphicon-chevron-down"></span> python source
