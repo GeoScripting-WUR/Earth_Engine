@@ -92,6 +92,7 @@ conda create -n ee_py3 -c conda-forge python=3 google-api-python-client pyCrypto
 source activate ee_py3
 
 # Ensure that a crypto library is available
+pip install oauth2client
 python -c "from oauth2client import crypt"
 
 # Install earthengine-api
