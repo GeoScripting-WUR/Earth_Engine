@@ -57,8 +57,8 @@ The main components of Earth Engine are:
 ## Google Earth Engine: Code Editor in JavaScript
 Today you will learn about Google Earth Engine by going through 9 tutorials made by Google. In the morning you will work on these tutorials. Have fun working in the cloud!
 
-1. [Get familiar with basic JavaScript syntax](https://developers.google.com/earth-engine/tutorial_js_01)
-2. [Get familiar with advanced JavaScript syntax](https://developers.google.com/earth-engine/tutorial_js_02)
+1. [Get familiar with basic JavaScript syntax](https://developers.google.com/earth-engine/tutorials/tutorial_js_01)
+2. [Get familiar with advanced JavaScript syntax](https://developers.google.com/earth-engine/tutorials/tutorial_js_02)
 3. [Get familiar with the Code Editor](https://developers.google.com/earth-engine/playground)
 4. [Visualizing Images and Image Bands](https://developers.google.com/earth-engine/tutorial_api_02)
 5. [Computations using Images](https://developers.google.com/earth-engine/tutorial_api_03)
