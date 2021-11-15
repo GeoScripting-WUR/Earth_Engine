@@ -1,5 +1,5 @@
 ---
-author: "David Swinkels"
+author: "Andrei Mirt"
 contributors: "Andrei Mirt"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 pagetitle: "Lesson 12: Google Earth Engine"
@@ -17,33 +17,42 @@ output:
 # Week 3, Lesson 12: Google Earth Engine
 
 Good morning! Today we will start working with Google Earth Engine.
+If you do not have an active account yet, [register an account now](https://signup.earthengine.google.com/#!/). Hopefully it will be activated soon. If it doesn't work out, ask someone to share a repository with you, that should grant you an account.
+
+### Today's learning objectives
+
+We will check out Google's Earth Engine. First what it is, but most importantly what we can do with it.
+
+## Google Earth Engine
+You might wonder why Google chose the same name as their other [Google Earth](https://earth.google.com/web/). It's no coincidence. Google Earth Engine is less of a name, and more of a description. It represents the collection of tools that were built to develop and ultimately power Google Earth. Google Earth Engine is Google's Earth Engine, but also Google Earth's engine.
+
+On top of the "Engine", GEE has 2 interfaces for users, through its Javascript and Python API. Even though they serve 2 different programming languages, they are almost interchangeable. The only major difference between the 2 is that Google built a nice [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) webapp, called the Code Editor, which can be used to interact with GEE, but only using Javascript. This is the most beginner friendly way to interact with Google Earth Engine, so that's what we'll focus on as well. If you are confident in your skills, feel free to explore interacting with GEE through Python as well.
+
+If you want to know more about what is Google Earth Engine, please [read the paper straight from the horse's mouth](https://www.sciencedirect.com/science/article/pii/S0034425717302900). For those of you more inclined towards dramatic arts, feel free to [watch (later!) the recent Netflix' take on it](https://www.netflix.com/title/81074012) as well.
+
+Lastly, Google Earth Engine contains almost everything you could wish in terms of easy access to free satellite data through its [Earth Engine Data Catalog] (https://developers.google.com/earth-engine/datasets/catalog)
+
+## Let's get our hands dirty
+
+Google already developed free and comprehensive [guides for its Earth Engine](https://developers.google.com/earth-engine/guides), so we'll make extensive use of those. Although ideally you would go through all their tutorials to become an expert, we believe the following are enough to get you to the necessary level for today's evening exercise and to self-develop afterwards.
+
+Read the following guides. Feel free to copy-paste the code examples in the code-editor, but please remember that you don't need yet to perfectly understand each shown line of code.
+
+1. [Javascript Quickstart](https://developers.google.com/earth-engine/guides/getstarted)
+2. [Coding Best Practices specific to Google Earth Engine](https://developers.google.com/earth-engine/guides/best_practices)
+3. [Debugging Google Earth Engine code](https://developers.google.com/earth-engine/guides/debugging)
+
+Follow only the first 2 tutorials (linked below) on the [Tutorials page](https://developers.google.com/earth-engine/tutorials/tutorials). To properly go through these tutorials, differently from the above guides, you have to run, and try to understand the code. There will probably still be some confusing lines of code left, but that's fine as long as you gave it a try. Learning is a process, not a task. Please note that each tutorial is comprised of multiple sections, so you'll have to click on the next section link at the bottom of the Introduction pages of the 2 tutorials linked below.
+
+1. [Introduction to JavaScript for Earth Engine (3 sections)](https://developers.google.com/earth-engine/tutorials/tutorial_js_01)
+2. [Introduction to the Earth Engine JavaScript API (7 sections)](https://developers.google.com/earth-engine/tutorials/tutorial_api_01)
+
+Only if you still have time, going through the [Concepts Guide](https://developers.google.com/earth-engine/guides/concepts_overview) might be useful to understand why is Google Earth Engine so awkwardly different from everything else you programmed so far.
+
+[Enjoy your lunch!](https://www.youtube.com/watch?v=Tas0c4e_E0M&list=PLivRXhCUgrZpCR3iSByLYdd_VwFv-3mfs&index=2)
+(If this message takes you by surprise, click [here](https://developers.google.com/earth-engine/tutorials/tutorial_forest_01))
 
 <!--
-
-Time  | Activity
-------------- | -------------
-Morning  |  Self-study: go through the following tutorial
-14:00 to 14:40  | Presentation and discussion
-Rest of the afternoon | Do/finalise the exercise.
-
--->
-
-If you do not have an activated account yet, [register an account](https://signup.earthengine.google.com/#!/) now and hopefully your account will be activated soon. If it doesn't work out, ask someone to share a repository with you, that should grant you an account.
-
-### Today's schedule
-
-We will have a look at the purpose of Earth Engine, what Earth Engine can do for you and how to use Google Earth Engine with JavaScript and Python.
-
-## Purpose Earth Engine
-The purpose of Earth Engine is:
-
-- Perform highly-interactive algorithm development at global scale
-- Push the edge of the envelope for big data in remote sensing
-- Enable high-impact, data-driven science
-- Make substantive progress on global challenges that involve large geospatial datasets
-
-The platform for global analysis is there, but it needs specialists, students and researchers like you, to use the Earth Engine platform to do high-impact data-driven science.
-
 ## What does Google Earth Engine do?
 
 Google Earth Engine is a cloud-based platform for planetary-scale environmental data analysis. 
@@ -254,5 +263,4 @@ Sunny places make good holidays. After all this work, you can use the map you ju
 Most of the information on Google Earth Engine in this tutorial comes directly from [Google](https://developers.google.com/earth-engine/) and from universities, whom developed [tutorials](https://developers.google.com/earth-engine/edu) for students to work with Google Earth Engine.
 
 - [Earth Engine developers forum](https://groups.google.com/forum/#!forum/google-earth-engine-developers)
-- [Creating cloud free landsat tile](https://www.researchgate.net/publication/302589628_Generating_a_cloud-free_homogeneous_Landsat-8_mosaic_of_Switzerland_using_Google_Earth_Engine)
 - Discussing black box of cloud computation by Jordi Inglada ([blog1](https://jordiinglada.net/wp/2016/05/12/is-google-earth-engine-evil-2/))([blog2](https://jordiinglada.net/wp/2016/05/23/sympathy-for-the-evil-lets-help-improve-google-earth-engine-2/))
