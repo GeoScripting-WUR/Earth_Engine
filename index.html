@@ -1,40 +1,170 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="David Swinkels" />
-  <title>Lesson 12: Google Earth Engine</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <meta name="author" content="Andrei Mirt" />
+  <title>Lesson 7: Google Earth Engine</title>
+  <style type="text/css">
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-  
+
   <!-- bootstrap -->
   <!--<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"  id="style">-->
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  
+
   <!-- highlight.js -->
   <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/default.min.css" rel="stylesheet" id="code-style">-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
   <script>
   hljs.LANGUAGES.r=function(a){var b="([a-zA-Z]|\\.[a-zA-Z.])[a-zA-Z0-9._]*";return{c:[a.HCM,{b:b,l:b,k:{keyword:"function if in break next repeat else for return switch while try tryCatch|10 stop warning require library attach detach source setMethod setGeneric setGroupGeneric setClass ...|10",literal:"NULL NA TRUE FALSE T F Inf NaN NA_integer_|10 NA_real_|10 NA_character_|10 NA_complex_|10"},r:0},{cN:"number",b:"0[xX][0-9a-fA-F]+[Li]?\\b",r:0},{cN:"number",b:"\\d+(?:[eE][+\\-]?\\d*)?L\\b",r:0},{cN:"number",b:"\\d+\\.(?!\\d)(?:i\\b)?",r:0},{cN:"number",b:"\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",r:0},{b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[a.BE],r:0},{cN:"string",b:"'",e:"'",c:[a.BE],r:0}]}}(hljs); </script>
   <!--<script type="text/javascript", src="https://yandex.st/highlightjs/7.3/languages/r.min.js"></script>-->
-  
+
   <!-- Manific Popup -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/0.8.9/jquery.magnific-popup.min.js"></script>
-  
+
   <script type="text/javascript"
     src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
@@ -42,16 +172,16 @@
   // Function to generate the dynamic table of contents
   jQuery.fn.generate_TOC = function () {
     var base = $(this[0]);
-  
+
     var selectors = ['h1', 'h2', 'h3', 'h4'];
-  
+
     var last_ptr = [{}, {}, {}, {}];
-  
+
     var anchors = {};
-  
+
     generate_anchor = function (text) {
       var test = text.replace(/\W/g, '_');
-  
+
       while(test in anchors){
         //if no suffix, add one
         if(test.match(/_\d+$/) === null){
@@ -65,13 +195,13 @@
       anchors[test]=1;
       return(test);
     }
-  
+
     $(selectors.join(',')).filter(function(index) { return $(this).parent().attr("id") != 'header'; }).each(function () {
-  
+
       var heading = $(this);
       var idx = selectors.indexOf(heading.prop('tagName').toLowerCase());
       var itr = 0;
-  
+
       while (itr <= idx) {
         if (jQuery.isEmptyObject(last_ptr[itr])) {
           last_ptr[itr] = $('<ul>').addClass('nav');
@@ -93,10 +223,10 @@
       var a = $('<a>')
       .text(heading.text())
       .attr('href', '#' + anchor);
-  
+
     var li = $('<li>')
       .append(a);
-  
+
     last_ptr[idx].append(li);
     for (i = idx + 1; i < last_ptr.length; i++) {
       last_ptr[i] = {};
@@ -106,35 +236,35 @@
   /* run scripts when document is ready */
   $(function() {
     "use strict";
-  
+
     var $window = $(window);
     var $body = $(document.body);
-  
+
     /* size of thumbnails */
-  
+
     var hidden_types = ['source']
     var output_types = ['output', 'message', 'warning', 'error']
-  
+
     /* style tables */
     $('table').addClass('table table-striped table-bordered table-hover table-condensed');
-  
+
     $('pre code').each(function(i, e) {
       hljs.highlightBlock(e);
     });
-  
+
     /* Magnific Popup */
     $(".thumbnail").each(function(){
       $(this).magnificPopup({
         disableOn: 768,
         closeOnContentClick: true,
-  
+
         type: 'image',
         items: {
           src: $(this).find('img').attr('src'),
         }
       });
     });
-  
+
     function toggle_block(obj, show) {
       var span = obj.find('span');
       if(show === true){
@@ -146,7 +276,7 @@
         obj.next('pre').slideUp();
       }
     }
-  
+
     function toggle_thumbnails(imgs, show){
       if(show === true){
         imgs.parents().show()
@@ -156,7 +286,7 @@
         imgs.slideUp(400, function(){ $(this).parent().hide(); });
       }
     }
-  
+
     function global_toggle(obj){
       var type = obj.attr('type');
       var show = !obj.parent('li').hasClass('active');
@@ -173,14 +303,14 @@
         $('.toggle.' + type).each(function() { toggle_block($(this), show); });
       }
     }
-  
+
     /* onclick toggle next code block */
     $('.toggle').click(function() {
       var span = $(this).find('span');
       toggle_block($(this), !span.hasClass('glyphicon-chevron-down'));
       return false
     })
-  
+
     // global toggles
     $('.toggle-global').click(function(){
       var type = $(this).attr('type');
@@ -206,18 +336,18 @@
       $('body > #wrap > .container > .row').append('<div class="col-md-2"><div id="toc" class="well sidebar sidenav affix hidden-print"/></div>');
       $('#toc').generate_TOC();
     }
-  
+
     $.each(hidden_types, function(i, type) {
       $('li[type=' + type + ']').each(function(){ global_toggle($(this)); });
     });
-  
+
     /* remove paragraphs with no content */
     $('p:empty').remove();
-  
+
     $body.scrollspy({
       target: '.sidebar',
     });
-  
+
     /* theme switch */
     $('.theme-switch').click(function(){
       var css = $('link[title=' + $(this).attr('title') + ']');
@@ -234,14 +364,14 @@
       $(this).closest('li').addClass('active');
       return false;
     });
-  
+
     //TODO refresh on show/hide
     $window.on('load', function () {
       $body.scrollspy('refresh');
     })
-  
+
   });
-  
+
   </script>
   <style>
   /* Knitr_bootstrap styles */
@@ -256,11 +386,11 @@
   .toggle{
     text-transform: capitalize;
   }
-  
+
   .toggle-global{
     text-transform: capitalize;
   }
-  
+
   /* Sticky footer styles */
   * {
     margin:0;
@@ -272,7 +402,7 @@
       /* The html and body elements cannot have any padding or margin. */
       /*overflow-x: hidden;*/
   }
-  
+
   /* Wrapper for page content to push down footer */
   #wrap {
       min-height: 100%;
@@ -281,43 +411,43 @@
       /* Negative indent footer by it's height */
       margin: 0 auto -120px;
   }
-  
+
   /* Set the fixed height of the footer here */
   #push,
   #footer {
       height: 120px;
   }
-  
+
   #footer {
     text-align: center;
   }
-  
+
   /* Top level subheader elements.  These are the first nested items underneath a header element. */
   .header li {
     font-size: 20px;
   }
-  
+
   /* Makes the font smaller for all subheader elements. */
   .sub-header li {
       font-size: 12px;
   }
-  
+
   button.thumbnails {
     margin-left:0px;
   }
-  
+
   /*
    * Side navigation
    *
    * Scrollspy and affixed enhanced navigation to highlight sections and secondary
    * sections of docs content.
    */
-  
+
   /* By default it's not affixed in mobile views, so undo that */
   .sidebar.affix {
     position: static;
   }
-  
+
   /* First level of nav */
   .sidenav {
     margin-top: 30px;
@@ -326,7 +456,7 @@
     padding-bottom: 10px;
     border-radius: 5px;
   }
-  
+
   /* All levels of nav */
   .sidebar .nav > li > a {
     display: block;
@@ -344,7 +474,7 @@
     background-color: transparent;
     border-right: 1px solid;
   }
-  
+
   /* Nav: second level (shown on .active) */
   .sidebar .nav .nav {
     display: none; /* Hide by default, but at >768px, show it */
@@ -356,14 +486,14 @@
     padding-left: 30px;
     font-size: 90%;
   }
-  
+
   .sidebar .nav .nav .nav > li > a {
     padding-left: 40px;
   }
   .sidebar .nav .nav .nav .nav > li > a {
     padding-left: 50px;
   }
-  
+
   /* Show and affix the side nav when space allows it */
   @media screen and (min-width: 992px) {
     .sidebar .nav > .active > ul {
@@ -395,14 +525,14 @@
       width: 263px;
     }
   }
-  
+
   #toc {
     padding: 10px 0px;
     margin:0;
     border:0;
   }
-  
-  
+
+
   .panel pre {
     margin: 0;
     padding: 0;
@@ -427,7 +557,7 @@
     background: #0b0b0b;
     opacity: 0.8;
     filter: alpha(opacity=80); }
-  
+
   .mfp-wrap {
     top: 0;
     left: 0;
@@ -437,7 +567,7 @@
     position: fixed;
     outline: none !important;
     -webkit-backface-visibility: hidden; }
-  
+
   .mfp-container {
     text-align: center;
     position: absolute;
@@ -449,16 +579,16 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
-  
+
   .mfp-container:before {
     content: '';
     display: inline-block;
     height: 100%;
     vertical-align: middle; }
-  
+
   .mfp-align-top .mfp-container:before {
     display: none; }
-  
+
   .mfp-content {
     position: relative;
     display: inline-block;
@@ -466,30 +596,30 @@
     margin: 0 auto;
     text-align: left;
     z-index: 1045; }
-  
+
   .mfp-inline-holder .mfp-content,
   .mfp-ajax-holder .mfp-content {
     width: 100%;
     cursor: auto; }
-  
+
   .mfp-ajax-cur {
     cursor: progress; }
-  
+
   .mfp-zoom-out-cur,
   .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
     cursor: -moz-zoom-out;
     cursor: -webkit-zoom-out;
     cursor: zoom-out; }
-  
+
   .mfp-zoom {
     cursor: pointer;
     cursor: -webkit-zoom-in;
     cursor: -moz-zoom-in;
     cursor: zoom-in; }
-  
+
   .mfp-auto-cursor .mfp-content {
     cursor: auto; }
-  
+
   .mfp-close,
   .mfp-arrow,
   .mfp-preloader,
@@ -497,13 +627,13 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none; }
-  
+
   .mfp-loading.mfp-figure {
     display: none; }
-  
+
   .mfp-hide {
     display: none !important; }
-  
+
   .mfp-preloader {
     color: #cccccc;
     position: absolute;
@@ -514,19 +644,19 @@
     left: 8px;
     right: 8px;
     z-index: 1044; }
-  
+
   .mfp-preloader a {
     color: #cccccc; }
-  
+
   .mfp-preloader a:hover {
     color: white; }
-  
+
   .mfp-s-ready .mfp-preloader {
     display: none; }
-  
+
   .mfp-s-error .mfp-content {
     display: none; }
-  
+
   button.mfp-close,
   button.mfp-arrow {
     overflow: visible;
@@ -539,11 +669,11 @@
     z-index: 1046;
     -webkit-box-shadow: none;
     box-shadow: none; }
-  
+
   button::-moz-focus-inner {
     padding: 0;
     border: 0; }
-  
+
   .mfp-close {
     width: 44px;
     height: 44px;
@@ -563,10 +693,10 @@
       opacity: 1; }
     .mfp-close:active {
       top: 1px; }
-  
+
   .mfp-close-btn-in .mfp-close {
     color: #333333; }
-  
+
   .mfp-image-holder .mfp-close,
   .mfp-iframe-holder .mfp-close {
     color: white;
@@ -574,7 +704,7 @@
     text-align: right;
     padding-right: 6px;
     width: 100%; }
-  
+
   .mfp-counter {
     position: absolute;
     top: 0;
@@ -582,7 +712,7 @@
     color: #cccccc;
     font-size: 12px;
     line-height: 18px; }
-  
+
   .mfp-arrow {
     position: absolute;
     opacity: 0.65;
@@ -593,14 +723,14 @@
     width: 90px;
     height: 110px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
-  
+
   .mfp-arrow:active {
     margin-top: -54px; }
-  
+
   .mfp-arrow:hover,
   .mfp-arrow:focus {
     opacity: 1; }
-  
+
   .mfp-arrow:before, .mfp-arrow:after,
   .mfp-arrow .mfp-b,
   .mfp-arrow .mfp-a {
@@ -623,7 +753,7 @@
   .mfp-arrow .mfp-b {
     border-top-width: 21px;
     border-bottom-width: 21px; }
-  
+
   .mfp-arrow-left {
     left: 0; }
     .mfp-arrow-left:after,
@@ -634,7 +764,7 @@
     .mfp-arrow-left .mfp-b {
       margin-left: 25px;
       border-right: 27px solid #3f3f3f; }
-  
+
   .mfp-arrow-right {
     right: 0; }
     .mfp-arrow-right:after,
@@ -644,22 +774,22 @@
     .mfp-arrow-right:before,
     .mfp-arrow-right .mfp-b {
       border-left: 27px solid #3f3f3f; }
-  
+
   .mfp-iframe-holder {
     padding-top: 40px;
     padding-bottom: 40px; }
-  
+
   .mfp-iframe-holder .mfp-content {
     line-height: 0;
     width: 100%;
     max-width: 900px; }
-  
+
   .mfp-iframe-scaler {
     width: 100%;
     height: 0;
     overflow: hidden;
     padding-top: 56.25%; }
-  
+
   .mfp-iframe-scaler iframe {
     position: absolute;
     display: block;
@@ -669,10 +799,10 @@
     height: 100%;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
     background: black; }
-  
+
   .mfp-iframe-holder .mfp-close {
     top: -40px; }
-  
+
   /* Main image in popup */
   img.mfp-img {
     width: auto;
@@ -685,7 +815,7 @@
     box-sizing: border-box;
     padding: 40px 0 40px;
     margin: 0 auto; }
-  
+
   /* The shadow behind the image */
   .mfp-figure:after {
     content: '';
@@ -700,10 +830,10 @@
     z-index: -1;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
     background: #444444; }
-  
+
   .mfp-figure {
     line-height: 0; }
-  
+
   .mfp-bottom-bar {
     margin-top: -36px;
     position: absolute;
@@ -711,26 +841,26 @@
     left: 0;
     width: 100%;
     cursor: auto; }
-  
+
   .mfp-title {
     text-align: left;
     line-height: 18px;
     color: #f3f3f3;
     word-wrap: break-word;
     padding-right: 36px; }
-  
+
   .mfp-figure small {
     color: #bdbdbd;
     display: block;
     font-size: 12px;
     line-height: 14px; }
-  
+
   .mfp-image-holder .mfp-content {
     max-width: 100%; }
-  
+
   .mfp-gallery .mfp-image-holder .mfp-figure {
     cursor: pointer; }
-  
+
   @media screen and (max-width: 800px) and (orientation: landscape), screen and (max-height: 300px) {
     /**
      * Remove all paddings around the image on small screen
@@ -738,15 +868,15 @@
     .mfp-img-mobile .mfp-image-holder {
       padding-left: 0;
       padding-right: 0; }
-  
+
     .mfp-img-mobile img.mfp-img {
       padding: 0; }
-  
+
     /* The shadow behind the image */
     .mfp-img-mobile .mfp-figure:after {
       top: 0;
       bottom: 0; }
-  
+
     .mfp-img-mobile .mfp-bottom-bar {
       background: rgba(0, 0, 0, 0.6);
       bottom: 0;
@@ -757,14 +887,14 @@
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
       box-sizing: border-box; }
-  
+
     .mfp-img-mobile .mfp-bottom-bar:empty {
       padding: 0; }
-  
+
     .mfp-img-mobile .mfp-counter {
       right: 5px;
       top: 3px; }
-  
+
     .mfp-img-mobile .mfp-close {
       top: 0;
       right: 0;
@@ -775,7 +905,7 @@
       position: fixed;
       text-align: center;
       padding: 0; }
-  
+
     .mfp-img-mobile .mfp-figure small {
       display: inline;
       margin-left: 5px; } }
@@ -783,15 +913,15 @@
     .mfp-arrow {
       -webkit-transform: scale(0.75);
       transform: scale(0.75); }
-  
+
     .mfp-arrow-left {
       -webkit-transform-origin: 0;
       transform-origin: 0; }
-  
+
     .mfp-arrow-right {
       -webkit-transform-origin: 100%;
       transform-origin: 100%; }
-  
+
     .mfp-container {
       padding-left: 6px;
       padding-right: 6px; } }
@@ -811,7 +941,7 @@
     top: 0;
     right: 0;
     padding-top: 0; }
-  
+
   //Magnific overrides
   .mfp-image img{
     background: white;
@@ -819,12 +949,12 @@
   .mfp-figure:after {
     background: white;
   }
-  
+
   /*
    * Off Canvas navbar toggle right
    * --------------------------------------------------
    */
-  
+
   @media screen and (max-width: 768px) {
     .row-offcanvas .collapsing {
     -webkit-transition: none 0;
@@ -874,244 +1004,42 @@
 <div class="container">
 <div class="row row-offcanvas row-offcanvas-right">
 <div class="contents col-xs-12 col-md-10">
-<h1 id="wur-geoscripting"><a href="https://geoscripting-wur.github.io/">WUR Geoscripting</a> <img src="https://www.wur.nl/upload/5e55a1d9-47c3-4149-9384-26d5147ee2d7_WUR_RGB_standard.png" alt="WUR logo" style="height: 35px;"/></h1>
-<h1 id="week-3-lesson-12-google-earth-engine">Week 3, Lesson 12: Google Earth Engine</h1>
-<p>Good morning! Today we will start working with Google Earth Engine.</p>
-<!--
-
-Time  | Activity
-------------- | -------------
-Morning  |  Self-study: go through the following tutorial
-14:00 to 14:40  | Presentation and discussion
-Rest of the afternoon | Do/finalise the exercise.
-
--->
-<p>If you do not have an activated account yet, <a href="https://signup.earthengine.google.com/#!/">register an account</a> now and hopefully your account will be activated soon. If it doesn’t work out, ask someone to share a repository with you, that should grant you an account.</p>
-<h3 id="todays-schedule">Today’s schedule</h3>
-<p>We will have a look at the purpose of Earth Engine, what Earth Engine can do for you and how to use Google Earth Engine with JavaScript and Python.</p>
-<h2 id="purpose-earth-engine">Purpose Earth Engine</h2>
-<p>The purpose of Earth Engine is:</p>
-<ul>
-<li>Perform highly-interactive algorithm development at global scale</li>
-<li>Push the edge of the envelope for big data in remote sensing</li>
-<li>Enable high-impact, data-driven science</li>
-<li>Make substantive progress on global challenges that involve large geospatial datasets</li>
-</ul>
-<p>The platform for global analysis is there, but it needs specialists, students and researchers like you, to use the Earth Engine platform to do high-impact data-driven science.</p>
-<h2 id="what-does-google-earth-engine-do">What does Google Earth Engine do?</h2>
-<p>Google Earth Engine is a cloud-based platform for planetary-scale environmental data analysis. The main components of Earth Engine are:</p>
-<ul>
-<li>Datasets: A petabyte-scale archive of publicly available remotely sensed imagery (such as Landsat, Sentinel and Modis) and other data (e.g. elevation data). <a href="https://earthengine.google.com/datasets/">Explore categories of data in the archive or browse and search datasets</a>.</li>
-<li>Compute power: Google’s computational infrastructure optimized for parallel processing of geospatial data. Learn more from <a href="http://www.sciencedirect.com/science/article/pii/S0034425717302900">Gorelick et al. (2017)</a>.</li>
-<li>APIs: APIs for JavaScript and Python (<a href="https://github.com/google/earthengine-api">see GitHub</a>) for making requests to the Earth Engine servers. These docs focus on JavaScript; (<a href="https://developers.google.com/earth-engine/getstarted">Guide for JavaScript API</a>). For Python, see the <a href="https://developers.google.com/earth-engine/python_install.html">Python install guide</a> and the Python examples in the Earth Engine GitHub repository.</li>
-<li>Code Editor: An online Integrated Development Environment (IDE) for rapid prototyping and visualization of complex spatial analyses using the JavaScript API <a href="https://developers.google.com/earth-engine/playground.html">Code Editor docs</a>.</li>
-</ul>
-<h2 id="google-earth-engine-code-editor-in-javascript">Google Earth Engine: Code Editor in JavaScript</h2>
-<p>Today you will learn about Google Earth Engine by going through 9 tutorials made by Google. In the morning you will work on these tutorials. Have fun working in the cloud!</p>
-<ol type="1">
-<li><a href="https://developers.google.com/earth-engine/tutorial_js_01">Get familiar with basic JavaScript syntax</a></li>
-<li><a href="https://developers.google.com/earth-engine/tutorial_js_02">Get familiar with advanced JavaScript syntax</a></li>
-<li><a href="https://developers.google.com/earth-engine/playground">Get familiar with the Code Editor</a></li>
-<li><a href="https://developers.google.com/earth-engine/tutorial_api_02">Visualizing Images and Image Bands</a></li>
-<li><a href="https://developers.google.com/earth-engine/tutorial_api_03">Computations using Images</a></li>
-<li><a href="https://developers.google.com/earth-engine/tutorial_api_04">Image Collections</a></li>
-<li><a href="https://developers.google.com/earth-engine/tutorial_api_05">Compositing, Masking, and Mosaicking</a></li>
-<li><a href="https://developers.google.com/earth-engine/tutorial_api_06">NDVI, Mapping a Function over a Collection, Quality Mosaicking</a></li>
-<li><a href="https://developers.google.com/earth-engine/tutorial_api_07">Exporting Charts and Images</a></li>
+<h1 id="wur-geoscripting"><a href="https://geoscripting-wur.github.io/">WUR Geoscripting</a> <img src="https://www.wur.nl/upload/854757ab-168f-46d7-b415-f8b501eebaa5_WUR_RGB_standard_2021-site.svg" alt="WUR logo" style="height: 35px;"/></h1>
+<h1 id="week-2-lesson-7-google-earth-engine">Week 2, Lesson 7: Google Earth Engine</h1>
+<p>Good morning! Today we will start working with Google Earth Engine. If you do not have an active account yet, <a href="https://signup.earthengine.google.com/#!/">register an account now!</a>. Hopefully it will be activated soon. If it doesn’t work out, ask someone to share a repository with you, and then accept it from your email address, that should grant you an account instantly.</p>
+<h3 id="todays-learning-objectives">Today’s learning objectives</h3>
+<p>We will check out Google’s Earth Engine. First what it is, but most importantly what we can do with it.</p>
+<h2 id="google-earth-engine">Google Earth Engine</h2>
+<p>You might wonder why Google chose the same name as their other <a href="https://earth.google.com/web/">Google Earth</a>. It’s no coincidence. Google Earth Engine is less of a name, and more of a description. It represents the collection of tools that were built to develop and ultimately power Google Earth. Google Earth Engine is Google’s Earth Engine, but also Google Earth’s engine.</p>
+<p>On top of the “Engine”, GEE has 2 interfaces for users, through its Javascript and Python API. Even though they serve 2 different programming languages, they are almost interchangeable. The only major difference between the 2 is that Google built a nice <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> webapp, called the <a href="https://code.earthengine.google.com/">Code Editor</a>, which can be used to interact with GEE, but only using Javascript. This is the most beginner friendly way to interact with Google Earth Engine, so that’s what we’ll focus on as well. If you are confident in your skills, feel free to explore interacting with <a href="https://developers.google.com/earth-engine/tutorials/community/intro-to-python-api-guiattard">GEE through Python</a> as well.</p>
+<p>If you want to know more about what is Google Earth Engine, please <a href="https://www.sciencedirect.com/science/article/pii/S0034425717302900">read the paper straight from the horse’s mouth</a>. For those of you more inclined towards dramatic arts, feel free to <a href="https://www.netflix.com/title/81074012">watch (later!) the recent Netflix’ take on it</a> as well.</p>
+<p>Lastly, Google Earth Engine contains almost everything you could wish in terms of easy access to free satellite data through its [Earth Engine Data Catalog] (https://developers.google.com/earth-engine/datasets/catalog)</p>
+<h2 id="lets-get-our-hands-dirty">Let’s get our hands dirty</h2>
+<p>Google already developed free and comprehensive <a href="https://developers.google.com/earth-engine/guides">guides for its Earth Engine</a>, so we’ll make extensive use of those. Although ideally you would go through all their tutorials to become an expert, we believe the following are enough to get you to the necessary level for today’s evening exercise and to self-develop afterwards.</p>
+<p>Follow only the first 2 tutorials (linked below) on the <a href="https://developers.google.com/earth-engine/tutorials/tutorials">Tutorials page</a>. To properly go through these tutorials, differently from the above guides, you have to run, and try to understand the code. There will probably still be some confusing lines of code left, but that’s fine as long as you gave it a try. Learning is a process, not a task. Please note that each tutorial is comprised of multiple sections, so you’ll have to click on the next section link at the bottom of the Introduction pages of the 2 tutorials linked below.</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://developers.google.com/earth-engine/tutorials/tutorial_js_01">Introduction to JavaScript for Earth Engine (3 sections, the links are at the bottom of each section)</a></li>
 </ol>
-<div class="row">
-
-<div class="alert alert-info">
-ProTip: at almost any point you can use <code>.aside(print)</code> for debugging purposes. Come back to this <a href="https://developers.google.com/earth-engine/debugging">Debugging guide</a> when in need
-</div>
-
-</div>
-<p>Google Earth Engine is a nice platform for processing and visualization. Even though raw data can be downloaded, such an attempt would defeat its intended goal of uploading the code next to the data instead of downloading data next to the code.</p>
-<div class="row">
-<div class="alert alert-success">
-<blockquote>
-<p>
-<strong>Question 1</strong>: Is the code on the online editor reproducible for other users?
-</p>
-</blockquote>
-</div>
-</div>
-<p>If you finished these tutorials and want to do more advanced stuff with the Code Editor you can have a look at <a href="https://developers.google.com/earth-engine/edu">other tutorials made by universities</a> or at more <a href="https://developers.google.com/earth-engine/">advanced guides of Earth Engine</a> (you can find the guides in the left pane) about the Image (e.g. <a href="https://developers.google.com/earth-engine/image_gradients">gradients</a>, <a href="https://developers.google.com/earth-engine/image_edges">edge detection</a>, <a href="https://developers.google.com/earth-engine/image_objects">object detection</a>), ImageCollection, Geometry &amp; Features, Reducer, Join, Chart (<a href="https://developers.google.com/earth-engine/charts_image_series_by_region">e.g. time series analysis</a>), Array, User Interfaces, Specialized Algorithms, Asset Management, Custom Applications and Earth Engine setup.</p>
-<h2 id="google-earth-engine-python-api">Google Earth Engine: Python API</h2>
-<p>Although Earth Engine focuses on using JavaScript in the online Earth Engine Code Editor, an Earth Engine Python module was developed. The module allows you to connect via an API to to the Earth Engine servers.</p>
-<p>This <a href="https://docs.google.com/presentation/d/1MVVeyCdm-FrMVRPop6wB3iyd85TAlwB-F9ygTQZ8S1w/pub?slide=id.g1e419debf0_1_205">presentation</a> on the Earth Engine user summit explains more about the Python API.</p>
-<p>Earth Engine normally uses Python 2.7. However Earth Engine is trying to make code compatible for both Python 2 and Python 3. Since Python 3 is the future, we will use Python 3. Your Google account needs to be accepted to authenticate your local Earth Engine Python module. So we need to setup the Python environment and get authenticated:</p>
-<div class="row">
-<button class="source bash toggle btn btn-xs btn-primary">
-<span class="glyphicon glyphicon-chevron-down"></span> bash source
-</button>
-<pre style=""><code class="source bash"># Create Conda environment
-conda create -n ee_py3 -c conda-forge python=3 google-api-python-client pyCrypto spyder jupyter
-
-source activate ee_py3
-
-# Ensure that a crypto library is available
-python -c "from oauth2client import crypt"
-
-# Install earthengine-api
-pip install earthengine-api
-
-# Authenticate earth engine
-earthengine authenticate
-# Follow procedure to authenticate and paste the access token in your terminal
-
-# Check if earth engine has been installed
-python -c "import ee; ee.Initialize()"
-# If you don't get an error, you are good to go</code></pre>
-</div>
-<p>After setting up the Python environment, you can start a jupyter notebook or spyder and run some Python code.</p>
-<div class="row">
-<button class="source python toggle btn btn-xs btn-primary">
-<span class="glyphicon glyphicon-chevron-down"></span> python source
-</button>
-<pre style=""><code class="source python"># Import the Earth Engine Python Package
-import ee
-
-# Initialize the Earth Engine object, using the authentication credentials.
-ee.Initialize()
-
-# Print the information for an image asset.
-image = ee.Image('srtm90_v4')
-print(image.getInfo())</code></pre>
-</div>
-<p>Now we want a Python script that shows a time series of Landsat 8 imagery.</p>
-<div class="row">
-<button class="source python toggle btn btn-xs btn-primary">
-<span class="glyphicon glyphicon-chevron-down"></span> python source
-</button>
-<pre style=""><code class="source python">import ee
-from ee import batch
-
-## Initialize connection to server
-ee.Initialize()
-
-## Define your image collection 
-collection = ee.ImageCollection('LANDSAT/LC8_L1T_TOA')
-
-## Define time range
-collection_time = collection.filterDate('2013-04-11', '2018-01-01') #YYYY-MM-DD
-
-## Select location based on location of tile
-path = collection_time.filter(ee.Filter.eq('WRS_PATH', 198))
-pathrow = path.filter(ee.Filter.eq('WRS_ROW', 24))
-# or via geographical location:
-#point_geom = ee.Geometry.Point(5, 52) #longitude, latitude
-#pathrow = collection_time.filterBounds(point_geom)
-
-## Select imagery with less then 5% of image covered by clouds
-clouds = pathrow.filter(ee.Filter.lt('CLOUD_COVER', 5))
-
-## Select bands
-bands = clouds.select(['B4', 'B3', 'B2'])
-
-## Make 8 bit data
-def convertBit(image):
-    return image.multiply(512).uint8()  
-
-## Convert bands to output video  
-outputVideo = bands.map(convertBit)
-
-print("Starting to create a video")
-
-## Export video to Google Drive
-out = batch.Export.video.toDrive(outputVideo, description='Netherlands_video_region_L8_time', dimensions = 720, framesPerSecond = 2, region=([5.588144,51.993435], [5.727906, 51.993435],[5.727906, 51.944356],[5.588144, 51.944356]), maxFrames=10000)
-
-## Process the image
-process = batch.Task.start(out)
-
-print("Process sent to cloud")</code></pre>
-</div>
-<p>To explain what is going on in the script: an ImageCollection is created and queried by filtering on date, location, clouds, bands. The ImageCollection object holds the information of the query and is sent to the Google Earth Engine server. The Google Earth Engine server then performs the task of gathering the data, making the imagery into a video and then exporting it to your Google Drive.</p>
-<p>There are some more <a href="https://github.com/tylere/AGU2017/tree/master/notebooks">advanced Python scripts</a> made by the Google Earth Engine developers that work with <code>bqplot</code> and <code>ipyleaflet</code>. If you want you can have a look at those too.</p>
-<div class="row">
-<button class="source bash toggle btn btn-xs btn-primary">
-<span class="glyphicon glyphicon-chevron-down"></span> bash source
-</button>
-<pre style=""><code class="source bash"># Install bqplot from conda-forge channel and ipyleaflet with pip
-source activate ee_py3
-conda install -c conda-forge bqplot
-pip install ipyleaflet
-jupyter nbextension enable --py --sys-prefix ipyleaflet</code></pre>
-</div>
-<!--
-
-# Exercise 13 : Blue skies
-
-In remote sensing clouds are our arch enemies. You probably heard this a lot, and you'll hear it again from everyone working with satellite imagery.
-
-But how big of a problem are clouds, cloud shadows, or other obstructions? Are they as bad as people say?
-
-Have fun figuring it out using the [online code editor of Google Earth Engine](https://code.earthengine.google.com/).
-
-## A bit of organization first
-
-1. Create a new repository, named like your team, using the red new button on your left in the [GEE code editor](https://code.earthengine.google.com/)
-
-2. Create a new file in that repository and name it *Assignment13*. At the beginning of this file write your names as comments.
-
-3. Either now, or after you're done with your assignment, share your newly created repository with andrei.mirt@gmail.com
-
-## Requirements
-
-Display a map for an area of your choice in which each pixel represents the number of clear Landsat 8 (not clouded) observations at that location for the year 2018. The final map should look somewhat similar to the picture below:
-
-![white for clear skyes and black for cloudy](exercise_expected_output.png)
-
-## Hints
-
-- It is really important to [Get familiar with the Geometry tools of the Code Editor](https://developers.google.com/earth-engine/playground), in order to be able to choose a geometry of interest.
-- The code editor is powerful because you can [visualize images](https://developers.google.com/earth-engine/tutorial_api_02) immediately on the Map section.
-- It is important to think what [Image Collections and bands](https://developers.google.com/earth-engine/tutorial_api_04) you need to filter on your dates.
-
-The quality mask is stored in the pixel_qa band as a bitmask. You can use the [Landsat 8 Surface Reflectance Code Product Guide](https://landsat.usgs.gov/sites/default/files/documents/lasrc_product_guide.pdf) to remap the clear pixel_qa values to 1. 386 is a good value for clear observations.
-
-
-<div class="row"><div class="alert alert-success">
-<blockquote>
-<p><strong>Question 2</strong>: Can you find a better value for clear observations than 386, could you use these together?</p>
-</blockquote>
-</div></div>
-
-## More hints
-
--Are there any interesting patterns on the total number of observations? Can you explain all these patterns? The answer to this question on [StackExchange](https://gis.stackexchange.com/questions/280156/mosaicking-a-image-collection-by-date-day-in-google-earth-engine) might come in handy.
-
-
-<div class="row">\BeginKnitrBlock{btn btn-success}<div class="btn btn-success">SuperHint</div>\EndKnitrBlock{btn btn-success}</div>
-<div class="row">\BeginKnitrBlock{alert alert-success}<div class="alert alert-success">You should probably first **count** all valid observations and then **mask** your way through **each** band towards the **total** number of clear observations.</div>\EndKnitrBlock{alert alert-success}</div>
-
-# Bonus
-
-- Do the same for sentinel 2. Plot the map in parallel linked panels.
-
-Still have some time left? Work on the visualization parameters.
-
-# Submission
-
-Ask the team checking your script for their Google Earth Engine account (gmail address), and don't forget to share your repository with them and with andrei.mirt@gmail.com
-
-In order to assess the exercise, consider the following tasks:
-
-- Task 1: The script displays a map somehow related to the input data
-- Task 2: The script displays the map that shows the number of clear observations, but some values are unnecessarily repeated
-- Task 3: The script displays the correct map that shows the number of clear observations, without repeating unnecessary values
-
-Further you can explore how you can use Google Earth Engine for your project or try to do some of the more [advanced guides](https://developers.google.com/earth-engine/)(scroll through the left pane).
-
-Sunny places make good holidays. After all this work, you can use the map you just created to search for your next holiday destination, while listening to an [Irving Berlin classic](https://www.youtube.com/watch?v=64rulm3CFhg).
-
--->
+<ul>
+<li>If you have troubles following this tutorial, only READ the <a href="https://developers.google.com/earth-engine/guides/getstarted">Javascript Quickstart Guide</a></li>
+<li>Feel free to copy-paste some of the guide code examples in the code-editor, but please remember that you don’t need yet to perfectly understand each shown line of code.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><a href="https://developers.google.com/earth-engine/tutorials/tutorial_api_01">Introduction to the Earth Engine JavaScript API (7 sections)</a></li>
+</ol>
+<p>If you run into trouble, either with the above tutorials, or the exercise, skim through the following guides. The answer is likely to be in there.</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://developers.google.com/earth-engine/guides/best_practices">Coding Best Practices specific to Google Earth Engine</a></li>
+<li><a href="https://developers.google.com/earth-engine/guides/debugging">Debugging Google Earth Engine code</a></li>
+</ol>
+<p>Only if you still have time, the <a href="https://developers.google.com/earth-engine/guides/concepts_overview">Concepts Guide</a> might be useful to understand why is Google Earth Engine so awkwardly different from anything else you programmed so far.</p>
+<p><a href="https://www.youtube.com/watch?v=Tas0c4e_E0M&amp;list=PLivRXhCUgrZpCR3iSByLYdd_VwFv-3mfs&amp;index=2">Enjoy your lunch!</a> (If this message takes you by surprise, click <a href="https://developers.google.com/earth-engine/tutorials/tutorial_forest_01">here</a>)</p>
 <h1 id="references-and-more-info">References and more info</h1>
-<p>Most of the information on Google Earth Engine in this tutorial comes directly from <a href="https://developers.google.com/earth-engine/">Google</a> and from universities, whom developed <a href="https://developers.google.com/earth-engine/edu">tutorials</a> for students to work with Google Earth Engine.</p>
+<p>Most of the information on Google Earth Engine in this tutorial comes directly from <a href="https://developers.google.com/earth-engine/">Google</a> and from universities, which developed <a href="https://developers.google.com/earth-engine/edu">tutorials</a> for students to work with Google Earth Engine.</p>
 <ul>
 <li><a href="https://groups.google.com/forum/#!forum/google-earth-engine-developers">Earth Engine developers forum</a></li>
-<li><a href="https://www.researchgate.net/publication/302589628_Generating_a_cloud-free_homogeneous_Landsat-8_mosaic_of_Switzerland_using_Google_Earth_Engine">Creating cloud free landsat tile</a></li>
-<li>Discussing black box of cloud computation by Jordi Inglada (<a href="https://jordiinglada.net/wp/2016/05/12/is-google-earth-engine-evil-2/">blog1</a>)(<a href="https://jordiinglada.net/wp/2016/05/23/sympathy-for-the-evil-lets-help-improve-google-earth-engine-2/">blog2</a>)
+<li>Discussing black box of cloud computation by Jordi Inglada (<a href="https://jordiinglada.net/wp/2016/05/12/is-google-earth-engine-evil-2/">blog1</a>)(<a href="https://jordiinglada.net/wp/2016/05/23/sympathy-for-the-evil-lets-help-improve-google-earth-engine-2/">blog2</a>)</li>
+<li><a href="https://git.wur.nl/geoscripting-2022/staff/exercise-7/exercise-7-starter">The exercise for the day</a>
 </div>
 </div>
 </div>
