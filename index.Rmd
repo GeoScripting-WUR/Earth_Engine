@@ -2,7 +2,7 @@
 author: "Andrei Mirt"
 contributors: "Andrei Mirt"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-pagetitle: "Lesson 12: Google Earth Engine"
+pagetitle: "Lesson 7: Google Earth Engine"
 output:
   knitrBootstrap::bootstrap_document:
     theme: "simplex"
