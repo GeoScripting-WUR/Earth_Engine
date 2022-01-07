@@ -12,7 +12,7 @@ output:
     highlight.chooser: TRUE
 ---
 
-# [WUR Geoscripting](https://geoscripting-wur.github.io/) <img src="https://www.wur.nl/upload/5e55a1d9-47c3-4149-9384-26d5147ee2d7_WUR_RGB_standard.png" alt="WUR logo" style="height: 35px;"/>
+# [WUR Geoscripting](https://geoscripting-wur.github.io/) <img src="https://www.wur.nl/upload/854757ab-168f-46d7-b415-f8b501eebaa5_WUR_RGB_standard_2021-site.svg" alt="WUR logo" style="height: 35px;"/>
 
 # Week 2, Lesson 7: Google Earth Engine
 
@@ -44,6 +44,7 @@ Follow only the first 2 tutorials (linked below) on the [Tutorials page](https:/
 2. [Introduction to the Earth Engine JavaScript API (7 sections)](https://developers.google.com/earth-engine/tutorials/tutorial_api_01)
 
 If you run into trouble, either with the above tutorials, or the exercise, skim through the following guides. The answer is likely to be in there.
+
 1. [Coding Best Practices specific to Google Earth Engine](https://developers.google.com/earth-engine/guides/best_practices)
 2. [Debugging Google Earth Engine code](https://developers.google.com/earth-engine/guides/debugging)
 
@@ -58,4 +59,4 @@ Most of the information on Google Earth Engine in this tutorial comes directly f
 
 - [Earth Engine developers forum](https://groups.google.com/forum/#!forum/google-earth-engine-developers)
 - Discussing black box of cloud computation by Jordi Inglada ([blog1](https://jordiinglada.net/wp/2016/05/12/is-google-earth-engine-evil-2/))([blog2](https://jordiinglada.net/wp/2016/05/23/sympathy-for-the-evil-lets-help-improve-google-earth-engine-2/))
- - [The exercise for the day]
+ - [The exercise for the day](https://git.wur.nl/geoscripting-2022/staff/exercise-7/exercise-7-starter)
