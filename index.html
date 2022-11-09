@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Andrei Mirt" />
-  <title>Lesson 7: Google Earth Engine</title>
+  <title>Tutorial 7: Google Earth Engine</title>
   <style type="text/css">
     html {
       line-height: 1.5;
@@ -16,13 +16,13 @@
     }
     body {
       margin: 0 auto;
-      max-width: none;
+      max-width: 36em;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
       padding-bottom: 50px;
       hyphens: auto;
-      word-wrap: break-word;
+      overflow-wrap: break-word;
       text-rendering: optimizeLegibility;
       font-kerning: normal;
     }
@@ -30,6 +30,9 @@
       body {
         font-size: 0.9em;
         padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
       }
     }
     @media print {
@@ -93,6 +96,7 @@
     pre code {
       padding: 0;
       overflow: visible;
+      overflow-wrap: normal;
     }
     .sourceCode {
      background-color: transparent;
@@ -134,15 +138,26 @@
     #TOC li {
       list-style: none;
     }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
     #TOC a:not(:hover) {
       text-decoration: none;
     }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1000,46 +1015,124 @@
   </style>
 </head>
 <body>
+<title>
+Tutorial 7: Google Earth Engine
+</title>
 <div id="wrap">
 <div class="container">
 <div class="row row-offcanvas row-offcanvas-right">
 <div class="contents col-xs-12 col-md-10">
-<h1 id="wur-geoscripting"><a href="https://geoscripting-wur.github.io/">WUR Geoscripting</a> <img src="https://www.wur.nl/upload/854757ab-168f-46d7-b415-f8b501eebaa5_WUR_RGB_standard_2021-site.svg" alt="WUR logo" style="height: 35px;"/></h1>
-<h1 id="week-2-lesson-7-google-earth-engine">Week 2, Lesson 7: Google Earth Engine</h1>
-<p>Good morning! Today we will start working with Google Earth Engine. If you do not have an active account yet, <a href="https://signup.earthengine.google.com/#!/">register an account now!</a>. Hopefully it will be activated soon. If it doesn’t work out, ask someone to share a repository with you, and then accept it from your email address, that should grant you an account instantly.</p>
-<h3 id="todays-learning-objectives">Today’s learning objectives</h3>
-<p>We will check out Google’s Earth Engine. First what it is, but most importantly what we can do with it.</p>
-<h2 id="google-earth-engine">Google Earth Engine</h2>
-<p>You might wonder why Google chose the same name as their other <a href="https://earth.google.com/web/">Google Earth</a>. It’s no coincidence. Google Earth Engine is less of a name, and more of a description. It represents the collection of tools that were built to develop and ultimately power Google Earth. Google Earth Engine is Google’s Earth Engine, but also Google Earth’s engine.</p>
-<p>On top of the “Engine”, GEE has 2 interfaces for users, through its Javascript and Python API. Even though they serve 2 different programming languages, they are almost interchangeable. The only major difference between the 2 is that Google built a nice <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> webapp, called the <a href="https://code.earthengine.google.com/">Code Editor</a>, which can be used to interact with GEE, but only using Javascript. This is the most beginner friendly way to interact with Google Earth Engine, so that’s what we’ll focus on as well. If you are confident in your skills, feel free to explore interacting with <a href="https://developers.google.com/earth-engine/tutorials/community/intro-to-python-api-guiattard">GEE through Python</a> as well.</p>
-<p>If you want to know more about what is Google Earth Engine, please <a href="https://www.sciencedirect.com/science/article/pii/S0034425717302900">read the paper straight from the horse’s mouth</a>. For those of you more inclined towards dramatic arts, feel free to <a href="https://www.netflix.com/title/81074012">watch (later!) the recent Netflix’ take on it</a> as well.</p>
-<p>Lastly, Google Earth Engine contains almost everything you could wish in terms of easy access to free satellite data through its [Earth Engine Data Catalog] (https://developers.google.com/earth-engine/datasets/catalog)</p>
-<h2 id="lets-get-our-hands-dirty">Let’s get our hands dirty</h2>
-<p>Google already developed free and comprehensive <a href="https://developers.google.com/earth-engine/guides">guides for its Earth Engine</a>, so we’ll make extensive use of those. Although ideally you would go through all their tutorials to become an expert, we believe the following are enough to get you to the necessary level for today’s evening exercise and to self-develop afterwards.</p>
-<p>Follow only the first 2 tutorials (linked below) on the <a href="https://developers.google.com/earth-engine/tutorials/tutorials">Tutorials page</a>. To properly go through these tutorials, try to understand the code. There will probably still be some confusing lines of code left, but that’s fine as long as you gave it a try. Learning is a process, not a task. Please note that each tutorial is comprised of multiple sections, so you’ll have to click on the next section link at the bottom of the Introduction pages of the 2 tutorials linked below.</p>
+<style type="text/css">
+body {max-width: none;}
+a:visited {color: #91170a;}
+</style>
+<h1 id="wur-geoscripting"><a
+href="https://geoscripting-wur.github.io/">WUR Geoscripting</a>
+<img src="https://www.wur.nl/upload/854757ab-168f-46d7-b415-f8b501eebaa5_WUR_RGB_standard_2021-site.svg" alt="WUR logo" style="height: 35px;"/></h1>
+<h1 id="week-2-tutorial-7-google-earth-engine">Week 2, Tutorial 7:
+Google Earth Engine</h1>
+<p>Good morning! Today we will start working with Google Earth Engine.
+If you do not have an active account yet, <a
+href="https://signup.earthengine.google.com/#!/">register an account
+now!</a>. Hopefully it will be activated soon. If it doesn’t work out,
+ask someone to share a repository with you, and then accept it from your
+email address, that should grant you an account instantly.</p>
+<h2 id="learning-objectives">Learning objectives</h2>
+<p>We will check out Google’s Earth Engine. First what it is, but most
+importantly what we can do with it.</p>
+<h1 id="google-earth-engine">Google Earth Engine</h1>
+<p>You might wonder why Google chose the same name as their other <a
+href="https://earth.google.com/web/">Google Earth</a>. It’s no
+coincidence. Google Earth Engine is less of a name, and more of a
+description. It represents the collection of tools that were built to
+develop and ultimately power Google Earth. Google Earth Engine is
+Google’s Earth Engine, but also Google Earth’s engine.</p>
+<p>On top of the “Engine”, GEE has 2 interfaces for users, through its
+Javascript and Python API. Even though they serve 2 different
+programming languages, they are almost interchangeable. The only major
+difference between the 2 is that Google built a nice <a
+href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a>
+webapp, called the <a href="https://code.earthengine.google.com/">Code
+Editor</a>, which can be used to interact with GEE, but only using
+Javascript. This is the most beginner friendly way to interact with
+Google Earth Engine, so that’s what we’ll focus on as well. If you are
+confident in your skills, feel free to explore interacting with <a
+href="https://developers.google.com/earth-engine/tutorials/community/intro-to-python-api-guiattard">GEE
+through Python</a> as well.</p>
+<p>If you want to know more about what is Google Earth Engine, please <a
+href="https://www.sciencedirect.com/science/article/pii/S0034425717302900">read
+the paper straight from the horse’s mouth</a>. For those of you more
+inclined towards dramatic arts, feel free to <a
+href="https://www.netflix.com/title/81074012">watch (later!) the recent
+Netflix’ take on it</a> as well.</p>
+<p>Lastly, Google Earth Engine contains almost everything you could wish
+in terms of easy access to free satellite data through its [Earth Engine
+Data Catalog]
+(https://developers.google.com/earth-engine/datasets/catalog)</p>
+<h1 id="lets-get-our-hands-dirty">Let’s get our hands dirty</h1>
+<p>Google already developed free and comprehensive <a
+href="https://developers.google.com/earth-engine/guides">guides for its
+Earth Engine</a>, so we’ll make extensive use of those. Although ideally
+you would go through all their tutorials to become an expert, we believe
+the following are enough to get you to the necessary level for today’s
+evening exercise and to self-develop afterwards.</p>
+<p>Follow only the first 2 tutorials (linked below) on the <a
+href="https://developers.google.com/earth-engine/tutorials/tutorials">Tutorials
+page</a>. To properly go through these tutorials, try to understand the
+code. There will probably still be some confusing lines of code left,
+but that’s fine as long as you gave it a try. Learning is a process, not
+a task. Please note that each tutorial is comprised of multiple
+sections, so you’ll have to click on the next section link at the bottom
+of the Introduction pages of the 2 tutorials linked below.</p>
 <ol style="list-style-type: decimal">
-<li><a href="https://developers.google.com/earth-engine/tutorials/tutorial_js_01">Introduction to JavaScript for Earth Engine (3 sections, the links are at the bottom of each section)</a></li>
+<li><a
+href="https://developers.google.com/earth-engine/tutorials/tutorial_js_01">Introduction
+to JavaScript for Earth Engine (3 sections, the links are at the bottom
+of each section)</a></li>
 </ol>
 <ul>
-<li>If you have troubles following this tutorial, only READ the <a href="https://developers.google.com/earth-engine/guides/getstarted">Javascript Quickstart Guide</a></li>
-<li>Feel free to copy-paste some of the guide code examples in the code-editor, but please remember that you don’t need yet to perfectly understand each shown line of code.</li>
+<li>If you have troubles following this tutorial, only READ the <a
+href="https://developers.google.com/earth-engine/guides/getstarted">Javascript
+Quickstart Guide</a></li>
+<li>Feel free to copy-paste some of the guide code examples in the
+code-editor, but please remember that you don’t need yet to perfectly
+understand each shown line of code.</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
-<li><a href="https://developers.google.com/earth-engine/tutorials/tutorial_api_01">Introduction to the Earth Engine JavaScript API (7 sections)</a></li>
+<li><a
+href="https://developers.google.com/earth-engine/tutorials/tutorial_api_01">Introduction
+to the Earth Engine JavaScript API (7 sections)</a></li>
 </ol>
-<p>If you run into trouble, either with the above tutorials, or the exercise, skim through the following guides. The answer is likely to be in there.</p>
+<p>If you run into trouble, either with the above tutorials, or the
+exercise, skim through the following guides. The answer is likely to be
+in there.</p>
 <ol style="list-style-type: decimal">
-<li><a href="https://developers.google.com/earth-engine/guides/best_practices">Coding Best Practices specific to Google Earth Engine</a></li>
-<li><a href="https://developers.google.com/earth-engine/guides/debugging">Debugging Google Earth Engine code</a></li>
+<li><a
+href="https://developers.google.com/earth-engine/guides/best_practices">Coding
+Best Practices specific to Google Earth Engine</a></li>
+<li><a
+href="https://developers.google.com/earth-engine/guides/debugging">Debugging
+Google Earth Engine code</a></li>
 </ol>
-<p>Only if you still have time, the <a href="https://developers.google.com/earth-engine/guides/concepts_overview">Concepts Guide</a> might be useful to understand why is Google Earth Engine so awkwardly different from anything else you programmed so far.</p>
-<p><a href="https://www.youtube.com/watch?v=Tas0c4e_E0M&amp;list=PLivRXhCUgrZpCR3iSByLYdd_VwFv-3mfs&amp;index=2">Enjoy your lunch!</a> (If this message takes you by surprise, click <a href="https://developers.google.com/earth-engine/tutorials/tutorial_forest_01">here</a>)</p>
+<p>Only if you still have time, the <a
+href="https://developers.google.com/earth-engine/guides/concepts_overview">Concepts
+Guide</a> might be useful to understand why is Google Earth Engine so
+awkwardly different from anything else you programmed so far.</p>
+<p><a
+href="https://www.youtube.com/watch?v=Tas0c4e_E0M&amp;list=PLivRXhCUgrZpCR3iSByLYdd_VwFv-3mfs&amp;index=2">Enjoy
+your lunch!</a> (If this message takes you by surprise, click <a
+href="https://developers.google.com/earth-engine/tutorials/tutorial_forest_01">here</a>)</p>
 <h1 id="references-and-more-info">References and more info</h1>
-<p>Most of the information on Google Earth Engine in this tutorial comes directly from <a href="https://developers.google.com/earth-engine/">Google</a> and from universities, which developed <a href="https://developers.google.com/earth-engine/edu">tutorials</a> for students to work with Google Earth Engine.</p>
 <ul>
-<li><a href="https://groups.google.com/forum/#!forum/google-earth-engine-developers">Earth Engine developers forum</a></li>
-<li>Discussing black box of cloud computation by Jordi Inglada (<a href="https://jordiinglada.net/wp/2016/05/12/is-google-earth-engine-evil-2/">blog1</a>)(<a href="https://jordiinglada.net/wp/2016/05/23/sympathy-for-the-evil-lets-help-improve-google-earth-engine-2/">blog2</a>)</li>
-<li><a href="https://git.wur.nl/geoscripting-2022/staff/exercise-7/exercise-7-starter">The exercise for the day</a>
+<li><p>Most of the information on Google Earth Engine in this tutorial
+comes directly from <a
+href="https://developers.google.com/earth-engine/">Google</a> and from
+universities, which developed <a
+href="https://developers.google.com/earth-engine/edu">tutorials</a> for
+students to work with Google Earth Engine.</p></li>
+<li><p>You might be interested in looking at the <a
+href="https://groups.google.com/forum/#!forum/google-earth-engine-developers">Earth
+Engine developers forum</a>.</p>
 </div>
 </div>
 </div>
@@ -1049,11 +1142,12 @@
 <div id="footer">
 <div class="container">
 <p class="text-muted" id="credit">
-Styled with <a href="https://github.com/jimhester/knitrBootstrap">knitrBootstrap</a>
+Styled with
+<a href="https://github.com/jimhester/knitrBootstrap">knitrBootstrap</a>
 </p>
 </div>
 </div>
-<link rel="stylesheet" id="theme" href="https://netdna.bootstrapcdn.com/bootswatch/3.0.0/simplex/bootstrap.min.css" media="screen"></link><link rel="stylesheet" id="highlight" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/tomorrow-night-bright.min.css" media="screen"></link>
+<p><link rel="stylesheet" id="theme" href="https://netdna.bootstrapcdn.com/bootswatch/3.0.0/simplex/bootstrap.min.css" media="screen"></link><link rel="stylesheet" id="highlight" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/tomorrow-night-bright.min.css" media="screen"></link></p>
 </div></li>
 </ul>
 </body>
